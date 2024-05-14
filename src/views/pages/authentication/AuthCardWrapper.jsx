@@ -11,11 +11,11 @@ import MainCard from '../../../ui-component/cards/MainCard';
 const AuthCardWrapper = ({ children, sx={}, ...other }) => (
   <MainCard
     sx={{
-      maxWidth: { xs: 300, lg: 375 },
+      maxWidth: { xs: 300, lg: 475 },
       // margin: { xs: 2.5, md: 3 },
       '& > *': {
         flexGrow: 1,
-        flexBasis: '50%'
+        flexBasis: '60%'
       },
       ...sx
     }}

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
@@ -17,9 +17,11 @@ import GetAppTwoToneIcon from '@mui/icons-material/GetAppOutlined';
 import FileCopyTwoToneIcon from '@mui/icons-material/FileCopyOutlined';
 import PictureAsPdfTwoToneIcon from '@mui/icons-material/PictureAsPdfOutlined';
 import ArchiveTwoToneIcon from '@mui/icons-material/ArchiveOutlined';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPengaduanAll } from '../../../store/actions/PengaduanAction';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
-  backgroundColor: theme.palette.secondary.dark,
+  backgroundColor: theme.palette.error.dark,
   color: '#fff',
   overflow: 'hidden',
   position: 'relative',
@@ -28,7 +30,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     position: 'absolute',
     width: 210,
     height: 210,
-    background: theme.palette.secondary[800],
+    background: theme.palette.error.light,
     borderRadius: '50%',
     top: -85,
     right: -95,
@@ -42,7 +44,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     position: 'absolute',
     width: 210,
     height: 210,
-    background: theme.palette.secondary[800],
+    background: theme.palette.error.light,
     borderRadius: '50%',
     top: -125,
     right: -15,
@@ -58,7 +60,9 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 const EarningCard = ({ isLoading }) => {
   const theme = useTheme();
-
+  const dispatch = useDispatch();
+  const pengaduanState = useSelector((state) => state.pengaduan.all);
+  const [total, setTotal] = useState(pengaduanState?.length)
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -68,6 +72,10 @@ const EarningCard = ({ isLoading }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  useEffect(() => {
+    dispatch(getPengaduanAll());
+  }, [dispatch]);
 
   return (
     <>
@@ -85,7 +93,7 @@ const EarningCard = ({ isLoading }) => {
                       sx={{
                         ...theme.typography.commonAvatar,
                         ...theme.typography.largeAvatar,
-                        backgroundColor: theme.palette.secondary[800],
+                        backgroundColor: theme.palette.error.light,
                         mt: 1
                       }}
                     >
@@ -93,12 +101,12 @@ const EarningCard = ({ isLoading }) => {
                     </Avatar>
                   </Grid>
                   <Grid item>
-                    <Avatar
+                    {/* <Avatar
                       variant="rounded"
                       sx={{
                         ...theme.typography.commonAvatar,
                         ...theme.typography.mediumAvatar,
-                        backgroundColor: theme.palette.secondary.dark,
+                        backgroundColor: theme.palette.error.dark,
                         color: theme.palette.secondary[200],
                         zIndex: 1
                       }}
@@ -107,8 +115,8 @@ const EarningCard = ({ isLoading }) => {
                       onClick={handleClick}
                     >
                       <MoreHorizIcon fontSize="inherit" />
-                    </Avatar>
-                    <Menu
+                    </Avatar> */}
+                    {/* <Menu
                       id="menu-earning-card"
                       anchorEl={anchorEl}
                       keepMounted
@@ -136,22 +144,22 @@ const EarningCard = ({ isLoading }) => {
                       <MenuItem onClick={handleClose}>
                         <ArchiveTwoToneIcon sx={{ mr: 1.75 }} /> Archive File
                       </MenuItem>
-                    </Menu>
+                    </Menu> */}
                   </Grid>
                 </Grid>
               </Grid>
               <Grid item>
                 <Grid container alignItems="center">
                   <Grid item>
-                    <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>$500.00</Typography>
+                    <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>{total}</Typography>
                   </Grid>
                   <Grid item>
                     <Avatar
                       sx={{
                         cursor: 'pointer',
                         ...theme.typography.smallAvatar,
-                        backgroundColor: theme.palette.secondary[200],
-                        color: theme.palette.secondary.dark
+                        backgroundColor: theme.palette.error.light,
+                        color: theme.palette.error.dark
                       }}
                     >
                       <ArrowUpwardIcon fontSize="inherit" sx={{ transform: 'rotate3d(1, 1, 1, 45deg)' }} />
@@ -163,11 +171,10 @@ const EarningCard = ({ isLoading }) => {
                 <Typography
                   sx={{
                     fontSize: '1rem',
-                    fontWeight: 500,
-                    color: theme.palette.secondary[200]
+                    fontWeight: 500
                   }}
                 >
-                  Total Earning
+                  Total Pengaduan
                 </Typography>
               </Grid>
             </Grid>

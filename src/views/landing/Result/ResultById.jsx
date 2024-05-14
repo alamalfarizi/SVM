@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PublicLayout from '../../../layout/LandingLayout';
 import Hero from '../../../ui-component/landing/Hero';
-import { Alert, Box, Container, Grid, TextField, Typography } from '@mui/material';
+import { Box, Container} from '@mui/material';
 import MainCard from '../../../ui-component/cards/MainCard';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,11 +9,11 @@ import { getPengaduanById } from '../../../store/actions/PengaduanAction';
 import CustomColumn from '../../../ui-component/CustomColumn';
 import CenteredCircularProgress from '../../../ui-component/CircularProgress';
 
-const ResultPage = () => {
+const ResultByIdPage = () => {
   const backgroundImage = 'https://res.cloudinary.com/ddugt5n5v/image/upload/v1715240242/SKRIPSI/images_dy1wrd.jpg';
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.pengaduan);
+  const { loading} = useSelector((state) => state.pengaduan);
   const pengaduanState = useSelector((state) => state.pengaduan.detail);
 
   function transformData(data) {
@@ -42,7 +42,6 @@ const ResultPage = () => {
   }
 
   useEffect(() => {
-    console.log(pengaduanState);
     if (id) {
       dispatch(getPengaduanById(id));
     }
@@ -76,4 +75,4 @@ const ResultPage = () => {
   );
 };
 
-export default ResultPage;
+export default ResultByIdPage;

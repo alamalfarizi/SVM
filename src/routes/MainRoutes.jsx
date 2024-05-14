@@ -7,20 +7,17 @@ import ProtectedRoute from '../utils/ProtectedRoute';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('../views/dashboard/Default')));
-const MonthlyCalendar = Loadable(lazy(() => import('../views/dashboard/MonthlyCalendar')));
 
 // data routing
 const DataPage = Loadable(lazy(() => import('../views/data/DataCheck')));
 const DataAddPage = Loadable(lazy(() => import('../views/data/DataAdd')));
 const DataDetailPage = Loadable(lazy(() => import('../views/data/DataDetail')));
+const DataAddAnswer = Loadable(lazy(() => import('../views/data/DataAddAnswer')));
 
 // Pengaduan routing
 const PengaduanPage = Loadable(lazy(() => import('../views/pengaduan/PengaduanCheck')));
 const PengaduanDetailPage = Loadable(lazy(() => import('../views/pengaduan/PengaduanCheckDetail')));
 const PengaduanAddPage = Loadable(lazy(() => import('../views/pengaduan/PengaduanAdd')));
-
-// clustering routing
-const ClusteringPage = Loadable(lazy(() => import('../views/clustering/Clustering')));
 
 // Article routing
 const ArticlePage = Loadable(lazy(() => import('../views/article/ArticleCheck')));
@@ -47,10 +44,6 @@ const MainRoutes = {
         {
           path: 'default',
           element: <DashboardDefault />
-        },
-        {
-          path: 'monthly-calendar',
-          element: <MonthlyCalendar />
         }
       ]
     },
@@ -70,6 +63,10 @@ const MainRoutes = {
         {
           path: 'data-detail/:id',
           element: <DataDetailPage />
+        },
+        {
+          path: 'data-answer/:id',
+          element: <DataAddAnswer />
         }
       ]
     },
@@ -89,17 +86,6 @@ const MainRoutes = {
         {
           path: 'pengaduan-add',
           element: <PengaduanAddPage />
-        }
-      ]
-    },
-
-    // Clustering
-    {
-      path: 'clustering',
-      children: [
-        {
-          path: 'grafik',
-          element: <ClusteringPage />
         }
       ]
     },

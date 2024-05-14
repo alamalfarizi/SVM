@@ -32,7 +32,6 @@ export const getQuestionById = createAsyncThunk('question/getDataById', async (i
 export const updateQuestion = createAsyncThunk('question/update', async ({ id, formData }, { rejectWithValue }) => {
   try {
     const response = await QuestionService.put(id, formData);
-    console.log(formData);
     console.log(response.data);
     return response.data;
   } catch (error) {

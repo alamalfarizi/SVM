@@ -5,7 +5,9 @@ import AnswerService from '../../services/AnswerServices';
 
 export const submitAnswer = createAsyncThunk('answer/created', async (formData, { rejectWithValue }) => {
     try {
+      console.log(formData)
       const response = await AnswerService.post(formData);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       if (error.response) {

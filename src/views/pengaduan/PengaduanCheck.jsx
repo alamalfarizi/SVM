@@ -4,7 +4,6 @@ import { Alert, Button, Chip, Grid, TableCell, Box } from '@mui/material';
 // project imports
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import CenteredCircularProgress from '../../ui-component/CircularProgress';
 import ConfirmDialog from '../../ui-component/ConfirmDialog';
@@ -12,27 +11,23 @@ import DeleteDialog from '../../ui-component/DeleteDialog';
 import SearchComponent from '../../ui-component/Search';
 import TableList from '../../ui-component/TableList';
 import MainCard from '../../ui-component/cards/MainCard';
-import CustomDialog from '../../ui-component/CustomDialog';
 import { deletePengaduan, getPengaduanAll } from '../../store/actions/PengaduanAction';
 import { toastNotif, ToastStatus } from '../../utils/Toast';
 
 const PengaduanCheck = () => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
-  const [selectValue, setSelectValue] = useState();
+  const [selectValue, setSelectValue] = useState('');
   const [isDeleteDialog, setDeleteDialog] = useState(false);
-  const [isFilterDialog, setFilterDialog] = useState(false);
   const [isConfirmDialog, setConfirmDialog] = useState(false);
   const { loading, error } = useSelector((state) => state.pengaduan);
-  
+
   const rowsState = useSelector((state) => state.pengaduan.all);
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const pageCount = Math.ceil(rowsState.length / rowsPerPage);
   const rows = rowsState.slice((page - 1) * rowsPerPage, page * rowsPerPage);
-  
-  const [count, setCount] = useState(rows.length);
-  
+
   const tableHeaders = ['Kode Pengaduan', 'Reporter Name', 'Identification Number', 'Contact Info', 'Reporter Status', 'Report Status'];
   const tableActions = [
     {
@@ -55,11 +50,6 @@ const PengaduanCheck = () => {
     }
   ];
 
-  useEffect(() => {
-    console.log(count);
-    dispatch(getPengaduanAll());
-  }, [dispatch]);
-
   const handleCancel = () => {
     setDeleteDialog(false);
     setConfirmDialog(false);
@@ -69,6 +59,7 @@ const PengaduanCheck = () => {
     dispatch(deletePengaduan(selectValue.id_report))
       .unwrap()
       .then((val) => {
+        console.log(val);
         if (val.error === false) {
           toastNotif(ToastStatus.SUCCESS, val.message);
           setDeleteDialog(false);
@@ -81,52 +72,18 @@ const PengaduanCheck = () => {
       });
   };
 
-  //   const dialogContent = (value) => (
-  //     <Box my={1}>
-  //       <Grid container spacing={2}>
-  //         <Grid item xs={6}>
-  //           <CustomSelect
-  //             label="Jenis Kamar"
-  //             value={filters.jenis_kamar}
-  //             onChange={handleChange('jenis_kamar')}
-  //             options={jenisKamarOptions}
-  //             size="small"
-  //             minWidth={'100%'}
-  //             margin={'normal'}
-  //           />
-  //           <CustomSelect
-  //             label="Gedung"
-  //             value={filters.gedung}
-  //             onChange={handleChange('gedung')}
-  //             options={gedungOptions}
-  //             size="small"
-  //             minWidth={'100%'}
-  //             margin={'normal'}
-  //           />
-  //         </Grid>
-  //         <Grid item xs={6}>
-  //           <CustomSelect
-  //             label="Lantai"
-  //             value={filters.lantai}
-  //             onChange={handleChange('lantai')}
-  //             options={lantaiOptions}
-  //             size="small"
-  //             minWidth={'100%'}
-  //             margin={'normal'}
-  //           />
-  //           <CustomSelect
-  //             label="Status Aktif Kamar"
-  //             value={filters.status_aktif}
-  //             onChange={handleChange('status_aktif')}
-  //             options={statusKamarOptions}
-  //             size="small"
-  //             minWidth={'100%'}
-  //             margin={'normal'}
-  //           />
-  //         </Grid>
-  //       </Grid>
-  //     </Box>
-  //   );
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(1);
+  };
+
+  useEffect(() => {
+    console.log(rowsState);
+    dispatch(getPengaduanAll());
+  }, [dispatch]);
 
   return (
     <MainCard title="Data Pengaduan">
@@ -140,7 +97,7 @@ const PengaduanCheck = () => {
         <SearchComponent
           //   onSearch={handleSearch}
           searchQuery={search}
-          //   onInputChange={handleChangeSearch} // Pass the input change handler
+          //   onInputChange={handleChangeSearch}
         />
       </Box>
       {loading ? (
@@ -160,11 +117,11 @@ const PengaduanCheck = () => {
           data={rows}
           tableHeaders={tableHeaders}
           tableActions={tableActions}
-          rowsPerPage={rowsPerPage}
-          // handleChangeRowsPerPage={setRowsPerPage}
-          totalPages={pageCount}
           page={page}
-          // handleChangePage={setPage}
+          totalPages={pageCount}
+          rowsPerPage={rowsPerPage}
+          handleChangePage={handleChangePage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
         >
           {(rowData) => (
             <>
@@ -203,25 +160,10 @@ const PengaduanCheck = () => {
           isOpen={isConfirmDialog}
           value={selectValue}
           onCancel={handleCancel}
-          // onConfirm={handleConfirm}
           valueSelect={selectValue.id_report}
           confirmTitle={selectValue.report_status === 'waiting' ? 'Non Aktif' : 'Aktif'}
         />
       )}
-
-      {/*
-      {isFilterDialog && (
-        <CustomDialog
-          open={isFilterDialog}
-          handleClose={() => setFilterDialog(false)}
-          content={dialogContent()}
-          title="Filter Kamar"
-          actions={[
-            { label: 'Reset', onClick: handleResetFilter, color: 'primary' },
-            { label: 'Filter', onClick: handleFilter, color: 'secondary', variant: 'contained' }
-          ]}
-        />
-      )} */}
     </MainCard>
   );
 };

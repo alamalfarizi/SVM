@@ -20,12 +20,17 @@ const remove = (id) => {
   return http.delete(`/report/${id}`);
 };
 
+const postTikcket = (data) => {
+  return http.post('/ticket', data);
+};
+
 const PengaduanService = {
   getAll,
   getById,
   put,
   post,
-  remove
+  remove,
+  postTikcket
 };
 
 export default PengaduanService;

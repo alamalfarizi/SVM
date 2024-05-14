@@ -1,5 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getPengaduanAll, getPengaduanById, submitPengaduan, updatePengaduan, deletePengaduan } from '../actions/PengaduanAction';
+import {
+  getPengaduanAll,
+  getPengaduanById,
+  submitPengaduan,
+  updatePengaduan,
+  deletePengaduan,
+  submitTicket
+} from '../actions/PengaduanAction';
 
 const initalState = {
   loading: false,
@@ -66,6 +73,17 @@ export const pengaduanSlice = createSlice({
     builder.addCase(deletePengaduan.rejected, (state) => {
       state.loading = false;
     });
+    builder.addCase(submitTicket.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(submitTicket.fulfilled, (state) => {
+      state.loading = false;
+      state.error = '';
+    });
+    builder.addCase(submitTicket.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? '';
+    })
   }
 });
 

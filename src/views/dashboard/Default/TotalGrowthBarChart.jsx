@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Grid, MenuItem, TextField, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 
 // third-party
 import ApexCharts from 'apexcharts';
@@ -17,28 +17,16 @@ import { gridSpacing } from '../../../store/constant';
 
 // chart data
 import chartData from './chart-data/total-growth-bar-chart';
-
-const status = [
-  {
-    value: 'today',
-    label: 'Today'
-  },
-  {
-    value: 'month',
-    label: 'This Month'
-  },
-  {
-    value: 'year',
-    label: 'This Year'
-  }
-];
+import { getPengaduanAll } from '../../../store/actions/PengaduanAction';
 
 // ==============================|| DASHBOARD DEFAULT - TOTAL GROWTH BAR CHART ||============================== //
 
 const TotalGrowthBarChart = ({ isLoading }) => {
   const [value, setValue] = useState('today');
   const theme = useTheme();
+  const dispatch = useDispatch();
   const customization = useSelector((state) => state.customization);
+  const pengaduanState = useSelector((state) => state.pengaduan.all);
 
   const { navType } = customization;
   const { primary } = theme.palette.text;
@@ -47,9 +35,32 @@ const TotalGrowthBarChart = ({ isLoading }) => {
   const grey500 = theme.palette.grey[500];
 
   const primary200 = theme.palette.primary[200];
-  const primaryDark = theme.palette.primary.dark;
-  const secondaryMain = theme.palette.secondary.main;
-  const secondaryLight = theme.palette.secondary.light;
+  const primaryDark = theme.palette.error.dark;
+  const secondaryMain = theme.palette.error.main;
+  const secondaryLight = theme.palette.error.light;
+
+  const getSeriesData = () => {
+    const seriesData = {};
+
+    pengaduanState.forEach((report) => {
+      if (report.cluster) {
+        const { cluster_level, cluster_id } = report.cluster;
+        if (!seriesData[cluster_level]) {
+          seriesData[cluster_level] = [];
+        }
+        seriesData[cluster_level].push(cluster_id);
+      }
+    });
+
+    return Object.entries(seriesData).map(([name, data]) => ({
+      name,
+      data
+    }));
+  };
+  
+  useEffect(() => {
+    dispatch(getPengaduanAll());
+  }, [dispatch]);
 
   useEffect(() => {
     const newChartData = {
@@ -79,10 +90,11 @@ const TotalGrowthBarChart = ({ isLoading }) => {
         labels: {
           colors: grey500
         }
-      }
+      },
+
+      series: getSeriesData()
     };
 
-    // do not load chart when loading
     if (!isLoading) {
       ApexCharts.exec(`bar-chart`, 'updateOptions', newChartData);
     }
@@ -96,27 +108,7 @@ const TotalGrowthBarChart = ({ isLoading }) => {
         <MainCard>
           <Grid container spacing={gridSpacing}>
             <Grid item xs={12}>
-              <Grid container alignItems="center" justifyContent="space-between">
-                <Grid item>
-                  <Grid container direction="column" spacing={1}>
-                    <Grid item>
-                      <Typography variant="subtitle2">Total Growth</Typography>
-                    </Grid>
-                    <Grid item>
-                      <Typography variant="h3">$2,324.00</Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <Grid item>
-                  <TextField id="standard-select-currency" select value={value} onChange={(e) => setValue(e.target.value)}>
-                    {status.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </Grid>
-              </Grid>
+              <Typography variant="h2">Clustering</Typography>
             </Grid>
             <Grid item xs={12}>
               <Chart {...chartData} />

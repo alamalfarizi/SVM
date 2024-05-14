@@ -1,5 +1,5 @@
 // material-ui
-import { Alert, Button, Chip, Grid, TableCell, Box, Typography } from '@mui/material';
+import { Alert, Button, TableCell, Box} from '@mui/material';
 
 // project imports
 import { useEffect, useState } from 'react';
@@ -22,9 +22,14 @@ const ArticleCheck = () => {
   const [selectValue, setSelectValue] = useState();
   const [isDeleteDialog, setDeleteDialog] = useState(false);
   const [isConfirmDialog, setConfirmDialog] = useState(false);
+  const { loading, error } = useSelector((state) => state.article);
+  const rowsState = useSelector((state) => state.article.all);
+
   const [page, setPage] = useState(1);
-  const [offset, setOffset] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const pageCount = Math.ceil(rowsState.length / rowsPerPage);
+  const rows = rowsState.slice((page - 1) * rowsPerPage, page * rowsPerPage);
+
   const tableHeaders = ['Kode', 'Judul', 'Deskripsi', 'Penulis'];
   const tableActions = [
     {
@@ -40,19 +45,32 @@ const ArticleCheck = () => {
     }
   ];
 
-  const { loading, error } = useSelector((state) => state.article);
-  const rows = useSelector((state) => state.article.all);
-
   const handleCancel = () => {
     setDeleteDialog(false);
     setConfirmDialog(false);
   };
 
   const handleDelete = (selectValue) => {
-    dispatch(deleteArticle(selectValue.article_id));
-    toastNotif(ToastStatus.SUCCESS, 'Data Berhasil Dihapus');
-    setDeleteDialog(false);
-    dispatch(getArticleAll());
+    dispatch(deleteArticle(selectValue.article_id))
+      .unwrap()
+      .then((val) => {
+        console.log(val);
+        toastNotif(ToastStatus.SUCCESS, 'Data Berhasil Dihapus');
+        setDeleteDialog(false);
+        dispatch(getArticleAll());
+      })
+      .catch((error) => {
+        console.log(error);
+        toastNotif(ToastStatus.ERROR, error.message);
+      });
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(1);
   };
 
   useEffect(() => {
@@ -116,8 +134,11 @@ const ArticleCheck = () => {
           data={rows}
           tableHeaders={tableHeaders}
           tableActions={tableActions}
-          // rowsPerPage={rowsPerPage}
           page={page}
+          totalPages={pageCount}
+          rowsPerPage={rowsPerPage}
+          handleChangePage={handleChangePage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
         >
           {(rowData) => (
             <>

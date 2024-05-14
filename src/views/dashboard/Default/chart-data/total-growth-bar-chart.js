@@ -33,8 +33,7 @@ const chartData = {
       }
     },
     xaxis: {
-      type: 'category',
-      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      type: 'category'
     },
     legend: {
       show: true,
@@ -67,7 +66,7 @@ const chartData = {
   },
   series: [
     {
-      name: 'Investment',
+      name: 'Inves',
       data: [35, 125, 35, 35, 35, 80, 35, 20, 35, 45, 15, 75]
     },
     {

@@ -16,7 +16,6 @@ const DataDetail = () => {
   const dispatch = useDispatch();
   const [selectValue, setSelectValue] = useState(id);
   const [isConfirmDialog, setConfirmDialog] = useState(false);
-
   const [updated, setUpdated] = useState({
     question_id: '',
     question_text: '',
@@ -26,15 +25,15 @@ const DataDetail = () => {
   const questionState = useSelector((state) => state.question.detail);
 
   useEffect(() => {
-    console.log('control', questionState);
     if (id) {
       dispatch(getQuestionById(id));
+      setUpdated({
+        question_id: questionState.question_id,
+        question_text: questionState.question_text,
+        answers: questionState.answers
+      });
     }
-    setUpdated({
-      question_id: questionState.question_id,
-      question_text: questionState.question_text,
-      answers: questionState.answers
-    });
+    console.log(questionState);
   }, [dispatch, id]);
 
   const handleAnswerChange = (index, value) => {
@@ -51,12 +50,28 @@ const DataDetail = () => {
   };
 
   const handleConfirmUpdate = () => {
-    console.log(updated);
-    dispatch(updateQuestion({ id, formData: updated }))
+    const question = {
+      id_question: updated.question_id,
+      question_text: updated.question_text
+    };
+
+    const answers = updated.answers.map((answer) => ({
+      id_answer: answer.answer_id,
+      answer_text: answer.answer_text,
+      weight: answer.weight
+    }));
+
+    const data = {
+      question,
+      answer: answers
+    };
+    console.log(data);
+
+    dispatch(updateQuestion({ id, formData: data }))
       .unwrap()
       .then((val) => {
         console.log(val);
-        if (val.error === false) {
+        if (val.error) {
           toastNotif(ToastStatus.SUCCESS, val.message);
           dispatch(getQuestionById(id));
           setConfirmDialog(false);
@@ -77,70 +92,74 @@ const DataDetail = () => {
   };
 
   return (
-    <MainCard title="Data Detail" isGoBack={true}>
-      <Box
-        sx={{
-          width: '100%'
-        }}
-      >
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={12} lg={12}>
-            <TextField
-              type="number"
-              disabled
-              fullWidth
-              label="Kode Pertanyaan"
-              value={updated.question_id || ''}
-              onChange={(e) => setUpdated({ ...updated, question_id: e.target.value })}
-            />
-          </Grid>
-          <Grid item xs={12} md={12} lg={12}>
-            <TextField
-              type="text"
-              fullWidth
-              label="Pertanyaan"
-              value={updated.question_text || ''}
-              onChange={(e) => setUpdated({ ...updated, question_text: e.target.value })}
-            />
-          </Grid>
-          {updated?.answers?.map((answer, index) => (
-            <Grid item xs={12} md={12} lg={12} key={answer.answer_id}>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1 }}>
-                <TextField
-                  fullWidth
-                  label={`Jawaban ${index + 1}`}
-                  value={answer.answer_text || ''}
-                  onChange={(e) => handleAnswerChange(index, e.target.value)}
-                />
-                <TextField
-                  type="number"
-                  InputProps={{ inputProps: { min: 0, max: 5 } }}
-                  label={`Bobot ${index + 1}`}
-                  value={answer.weight || ''}
-                  onChange={(e) => handleWeightChange(index, e.target.value)}
-                />
-              </Box>
+    <>
+      <MainCard title="Data Detail" isGoBack={true}>
+        <Box
+          sx={{
+            width: '100%'
+          }}
+        >
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={12} lg={12}>
+              <TextField
+                type="number"
+                disabled
+                fullWidth
+                label="Kode Pertanyaan"
+                value={updated.question_id || ''}
+                onChange={(e) => setUpdated({ ...updated, question_id: e.target.value })}
+              />
             </Grid>
-          ))}
-          <Grid item xs={12} md={6} lg={6} />
-          <Grid item xs={12} md={6} lg={6}>
-            <Button variant="contained" fullWidth color="error" sx={{ borderRadius: '8px' }} onClick={handleUpdateQuestion}>
-              Ubah
-            </Button>
-          </Grid>
-        </Grid>
-      </Box>
+            <Grid item xs={12} md={12} lg={12}>
+              <TextField
+                type="text"
+                fullWidth
+                label="Pertanyaan"
+                value={updated.question_text || ''}
+                onChange={(e) => setUpdated({ ...updated, question_text: e.target.value })}
+              />
+            </Grid>
 
-      {isConfirmDialog && (
-        <ConfirmDialog
-          isOpen={isConfirmDialog}
-          valueSelect={selectValue}
-          onCancel={handleCancelUpdate}
-          onConfirm={handleConfirmUpdate}
-          confirmTitle="Ubah Data"
-        />
-      )}
-    </MainCard>
+            {updated?.answers?.map((answer, index) => (
+              <Grid item xs={12} md={12} lg={12} key={answer.answer_id}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1 }}>
+                  <TextField
+                    fullWidth
+                    label={`Jawaban ${index + 1}`}
+                    value={answer.answer_text || ''}
+                    onChange={(e) => handleAnswerChange(index, e.target.value)}
+                  />
+                  <TextField
+                    type="number"
+                    InputProps={{ inputProps: { min: 0, max: 5 } }}
+                    label={`Bobot ${index + 1}`}
+                    value={answer.weight || ''}
+                    onChange={(e) => handleWeightChange(index, e.target.value)}
+                  />
+                </Box>
+              </Grid>
+            ))}
+
+            <Grid item xs={12} md={6} lg={6} />
+            <Grid item xs={12} md={6} lg={6}>
+              <Button variant="contained" fullWidth color="error" sx={{ borderRadius: '8px' }} onClick={handleUpdateQuestion}>
+                Ubah
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
+        {isConfirmDialog && (
+          <ConfirmDialog
+            isOpen={isConfirmDialog}
+            valueSelect={selectValue}
+            onCancel={handleCancelUpdate}
+            onConfirm={handleConfirmUpdate}
+            confirmTitle="Ubah Data"
+          />
+        )}
+      </MainCard>
+    
+    </>
   );
 };
 

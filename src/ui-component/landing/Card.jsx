@@ -16,8 +16,8 @@ const CardLanding = ({ article }) => {
         }
       }}
     >
-      <Box sx={{ width: '100%' }}>
-        <img src={`https://sepkha.tipnl.com/${article.picture_url}`} alt="background" style={{ width: '100%', height: '100%' }} />
+      <Box sx={{ width: '50%', height: '30vh' }}>
+        <img src={`https://sepkha.tipnl.com/${article.picture_url}`} alt="background" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
       </Box>
       <Box sx={{ paddingY: '20px', marginX: '20px' }}>
         <Typography variant="h2">{article.title}</Typography>

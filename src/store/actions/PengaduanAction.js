@@ -67,3 +67,17 @@ export const deletePengaduan = createAsyncThunk('pengaduan/delete', async (id, {
     }
   }
 });
+
+export const submitTicket = createAsyncThunk('pengaduan/ticket', async (formData, { rejectWithValue }) => {
+  try {
+    const response = await PengaduanService.postTikcket(formData);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return rejectWithValue(error.response.data);
+    } else {
+      return rejectWithValue(error.message);
+    }
+  }
+});

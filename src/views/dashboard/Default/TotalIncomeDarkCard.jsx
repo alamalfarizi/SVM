@@ -10,11 +10,14 @@ import TotalIncomeCard from '../../../ui-component/cards/Skeleton/TotalIncomeCar
 
 // assets
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
+import { useDispatch, useSelector } from 'react-redux';
+import { getArticleAll } from '../../../store/actions/ArticleAction';
+import { useEffect, useState } from 'react';
 
 // styles
 const CardWrapper = styled(MainCard)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.dark,
-  color: theme.palette.primary.light,
+  backgroundColor: theme.palette.error.main,
+  color: theme.palette.error.light,
   overflow: 'hidden',
   position: 'relative',
   '&:after': {
@@ -22,20 +25,29 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     position: 'absolute',
     width: 210,
     height: 210,
-    background: `linear-gradient(210.04deg, ${theme.palette.primary[200]} -50.94%, rgba(144, 202, 249, 0) 83.49%)`,
+    background: `linear-gradient(210.04deg, ${theme.palette.error.dark} -50.94%, rgba(144, 202, 249, 0) 83.49%)`,
     borderRadius: '50%',
-    top: -30,
-    right: -180
+    top: -85,
+    right: -95,
+    [theme.breakpoints.down('sm')]: {
+      top: -105,
+      right: -140
+    }
   },
   '&:before': {
     content: '""',
     position: 'absolute',
     width: 210,
     height: 210,
-    background: `linear-gradient(140.9deg, ${theme.palette.primary[200]} -14.02%, rgba(144, 202, 249, 0) 77.58%)`,
+    background: `linear-gradient(140.9deg, ${theme.palette.error.light} -14.02%, rgba(144, 202, 249, 0) 77.58%)`,
     borderRadius: '50%',
-    top: -160,
-    right: -130
+    top: -125,
+    right: -15,
+    opacity: 0.5,
+    [theme.breakpoints.down('sm')]: {
+      top: -155,
+      right: -70
+    }
   }
 }));
 
@@ -43,6 +55,13 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 const TotalIncomeDarkCard = ({ isLoading }) => {
   const theme = useTheme();
+  const dispacth = useDispatch();
+  const artikelState = useSelector((state) => state.article.all);
+  const [values, setValues] = useState(artikelState?.length);
+
+  useEffect(() => {
+    dispacth(getArticleAll());
+  }, [dispacth]);
 
   return (
     <>
@@ -59,7 +78,7 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
                     sx={{
                       ...theme.typography.commonAvatar,
                       ...theme.typography.largeAvatar,
-                      backgroundColor: theme.palette.primary[800],
+                      backgroundColor: theme.palette.error.dark,
                       color: '#fff'
                     }}
                   >
@@ -74,12 +93,12 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
                   }}
                   primary={
                     <Typography variant="h4" sx={{ color: '#fff' }}>
-                      $203k
+                      {values}
                     </Typography>
                   }
                   secondary={
                     <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 0.25 }}>
-                      Total Income
+                      Total Artikel
                     </Typography>
                   }
                 />

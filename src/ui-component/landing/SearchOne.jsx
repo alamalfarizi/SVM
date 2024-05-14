@@ -9,15 +9,15 @@ import { Avatar, Box, ButtonBase, Card, Grid, InputAdornment, OutlinedInput, Pop
 import PopupState, { bindPopper, bindToggle } from 'material-ui-popup-state';
 
 // project imports
-import DialogFilters from './DialogFilters';
 import Transitions from '../cards/extended/Transitions';
 
 // assets
 import { IconAdjustmentsHorizontal, IconSearch, IconX } from '@tabler/icons-react';
 import { shouldForwardProp } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { submitTicket } from '../../store/actions/PengaduanAction';
+import { toastNotif, ToastStatus } from '../../utils/Toast';
 
 // styles
 const PopperStyle = styled(Popper, { shouldForwardProp })(({ theme }) => ({
@@ -61,7 +61,7 @@ const HeaderAvatarStyle = styled(Avatar, { shouldForwardProp })(({ theme }) => (
 
 // ==============================|| SEARCH INPUT - MOBILE||============================== //
 
-const MobileSearch = ({ value, setValue, popupState, filter }) => {
+const MobileSearch = ({ value, setValue, handleSubmit, popupState, filter }) => {
   const theme = useTheme();
 
   return (
@@ -73,6 +73,15 @@ const MobileSearch = ({ value, setValue, popupState, filter }) => {
       startAdornment={
         <InputAdornment position="start">
           <IconSearch stroke={1.5} size="1rem" color={theme.palette.grey[500]} />
+        </InputAdornment>
+      }
+      endAdornment={
+        <InputAdornment position="end">
+          <ButtonBase sx={{ borderRadius: '12px' }} onClick={handleSubmit}>
+            <HeaderAvatarStyle variant="rounded">
+              <IconSearch stroke={1.5} size="1.3rem" />
+            </HeaderAvatarStyle>
+          </ButtonBase>
         </InputAdornment>
       }
       aria-describedby="search-helper-text"
@@ -91,8 +100,6 @@ MobileSearch.propTypes = {
 
 const SearchOne = () => {
   const theme = useTheme();
-  const location = useLocation();
-  const isHomePage = location.pathname === '/';
   const dispatch = useDispatch();
 
   const [searchInput, setSearchInput] = useState('');
@@ -101,7 +108,33 @@ const SearchOne = () => {
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       setDataSearch(searchInput);
+      dispatch(submitTicket(searchInput))
+        .unwrap()
+        .then((val) => {
+          console.log(val);
+          if (val.error === false) {
+            toastNotif(ToastStatus.SUCCESS, val.message);
+            Navigate(`/result/${val.data.report.id_report}`);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          toastNotif(ToastStatus.ERROR, error);
+        });
     }
+    dispatch(submitTicket(searchInput))
+      .unwrap()
+      .then((val) => {
+        console.log(val);
+        if (val.error === false) {
+          toastNotif(ToastStatus.SUCCESS, val.message);
+          Navigate(`/result/${val.data.report.id_report}`);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        toastNotif(ToastStatus.ERROR, error);
+      });
   };
 
   useEffect(() => {
@@ -110,7 +143,7 @@ const SearchOne = () => {
 
   return (
     <>
-      <Box sx={{ display: { xs: 'block', lg: 'none' }, ml: isHomePage ? -2 : 16, my: 2 }}>
+      <Box sx={{ display: { xs: 'block', lg: 'none' }, ml: 16, my: 2 }}>
         <PopupState variant="popper" popupId="demo-popup-popper">
           {(popupState) => (
             <>
@@ -137,7 +170,12 @@ const SearchOne = () => {
                         <Box sx={{ p: 2 }}>
                           <Grid container alignItems="center" justifyContent="space-between">
                             <Grid item xs>
-                              <MobileSearch value={searchInput} setValue={setSearchInput} popupState={popupState} />
+                              <MobileSearch
+                                value={searchInput}
+                                setValue={setSearchInput}
+                                popupState={popupState}
+                                handleSubmit={handleKeyPress}
+                              />
                             </Grid>
                           </Grid>
                         </Box>
@@ -156,11 +194,19 @@ const SearchOne = () => {
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           onKeyPress={handleKeyPress}
-        
           placeholder="Search"
           startAdornment={
             <InputAdornment position="start">
               <IconSearch stroke={1.5} size="1rem" color={theme.palette.grey[500]} />
+            </InputAdornment>
+          }
+          endAdornment={
+            <InputAdornment position="end">
+              <ButtonBase sx={{ borderRadius: '12px' }} onClick={handleKeyPress}>
+                <HeaderAvatarStyle variant="rounded">
+                  <IconSearch stroke={1.5} size="1.3rem" />
+                </HeaderAvatarStyle>
+              </ButtonBase>
             </InputAdornment>
           }
           aria-describedby="search-helper-text"

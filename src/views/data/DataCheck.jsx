@@ -14,26 +14,25 @@ import SearchComponent from '../../ui-component/Search';
 import TableList from '../../ui-component/TableList';
 import MainCard from '../../ui-component/cards/MainCard';
 import CustomDialog from '../../ui-component/CustomDialog';
-import { deletePengaduan, getPengaduanAll } from '../../store/actions/PengaduanAction';
-import { getQuestionAll } from '../../store/actions/QuestionAction';
+import { deleteQuestion, getQuestionAll } from '../../store/actions/QuestionAction';
+import { toastNotif, ToastStatus } from '../../utils/Toast';
 
 // ==============================|| DATA PAGE ||============================================ //
 const DataCheck = () => {
   const dispatch = useDispatch();
+  const [search, setSearch] = useState('');
   const [selectValue, setSelectValue] = useState();
   const [isDeleteDialog, setDeleteDialog] = useState(false);
   const [isFilterDialog, setFilterDialog] = useState(false);
   const [isConfirmDialog, setConfirmDialog] = useState(false);
+  const { loading, error } = useSelector((state) => state.question);
+  const rowsState = useSelector((state) => state.question.all);
+
   const [page, setPage] = useState(1);
-  const [count, setCount] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [search, setSearch] = useState('');
-  const [filters, setFilters] = useState({
-    jenis_kamar: '',
-    gedung: '',
-    lantai: '',
-    status_aktif: ''
-  });
+  const pageCount = Math.ceil(rowsState.length / rowsPerPage);
+  const rows = rowsState.slice((page - 1) * rowsPerPage, page * rowsPerPage);
+
   const tableHeaders = ['Kode', 'Pertanyaan', 'Jawaban'];
   const tableActions = [
     {
@@ -49,9 +48,6 @@ const DataCheck = () => {
     }
   ];
 
-  const { loading, error } = useSelector((state) => state.question);
-  const rows = useSelector((state) => state.question.all);
-
   useEffect(() => {
     console.log(rows);
     dispatch(getQuestionAll());
@@ -63,12 +59,12 @@ const DataCheck = () => {
   };
 
   const handleDelete = (selectValue) => {
-    dispatch(deletePengaduan(selectValue.id_report))
+    dispatch(deleteQuestion(selectValue.question_id))
       .unwrap()
       .then((val) => {
-        if (val.success) {
+        if (val.error === false) {
           toastNotif(ToastStatus.SUCCESS, val.message);
-          dispatch(getPengaduanAll());
+          dispatch(getQuestionAll());
           setDeleteDialog(false);
         }
       })
@@ -78,52 +74,13 @@ const DataCheck = () => {
       });
   };
 
-  //   const dialogContent = (value) => (
-  //     <Box my={1}>
-  //       <Grid container spacing={2}>
-  //         <Grid item xs={6}>
-  //           <CustomSelect
-  //             label="Jenis Kamar"
-  //             value={filters.jenis_kamar}
-  //             onChange={handleChange('jenis_kamar')}
-  //             options={jenisKamarOptions}
-  //             size="small"
-  //             minWidth={'100%'}
-  //             margin={'normal'}
-  //           />
-  //           <CustomSelect
-  //             label="Gedung"
-  //             value={filters.gedung}
-  //             onChange={handleChange('gedung')}
-  //             options={gedungOptions}
-  //             size="small"
-  //             minWidth={'100%'}
-  //             margin={'normal'}
-  //           />
-  //         </Grid>
-  //         <Grid item xs={6}>
-  //           <CustomSelect
-  //             label="Lantai"
-  //             value={filters.lantai}
-  //             onChange={handleChange('lantai')}
-  //             options={lantaiOptions}
-  //             size="small"
-  //             minWidth={'100%'}
-  //             margin={'normal'}
-  //           />
-  //           <CustomSelect
-  //             label="Status Aktif Kamar"
-  //             value={filters.status_aktif}
-  //             onChange={handleChange('status_aktif')}
-  //             options={statusKamarOptions}
-  //             size="small"
-  //             minWidth={'100%'}
-  //             margin={'normal'}
-  //           />
-  //         </Grid>
-  //       </Grid>
-  //     </Box>
-  //   );
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(1);
+  };
 
   return (
     <MainCard
@@ -181,12 +138,12 @@ const DataCheck = () => {
         <TableList
           data={rows}
           tableHeaders={tableHeaders}
+          page={page}
           tableActions={tableActions}
           rowsPerPage={rowsPerPage}
-          //   handleChangeRowsPerPage={handleChangeRowsPerPage}
-          //   totalPages={Math.ceil(count / rowsPerPage) || 0}
-          page={page}
-          //   handleChangePage={handleChangePage}
+          totalPages={pageCount}
+          handleChangePage={handleChangePage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
         >
           {(rowData) => (
             <>
@@ -208,7 +165,7 @@ const DataCheck = () => {
         <DeleteDialog
           isOpen={isDeleteDialog}
           value={selectValue}
-          valueSelect={selectValue.id_report}
+          valueSelect={selectValue.question_id}
           onCancel={handleCancel}
           onDelete={handleDelete}
         />
@@ -220,7 +177,7 @@ const DataCheck = () => {
           value={selectValue}
           onCancel={handleCancel}
           // onConfirm={handleConfirm}
-          valueSelect={selectValue.id_report}
+          valueSelect={selectValue.question_id}
           confirmTitle={selectValue.report_status === 'waiting' ? 'Non Aktif' : 'Aktif'}
         />
       )}

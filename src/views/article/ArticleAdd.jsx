@@ -13,7 +13,7 @@ import { toastNotif, ToastStatus } from '../../utils/Toast';
 const ArticleAdd = () => {
   const dispatch = useDispatch();
   const [isConfirmDialog, setConfirmDialog] = useState(false);
-  const [selectValue, setSelectValue] = useState('Pengaduan');
+  const [selectValue, setSelectValue] = useState('Artikel');
   const [values, setValues] = useState({
     title: '',
     description: '',
@@ -43,16 +43,12 @@ const ArticleAdd = () => {
 
   const handleConfirmSubmit = () => {
     console.log(values);
-    dispatch(
-      submitArticle({
-        formData: {
-          title: values.title,
-          description: values.description,
-          author: values.author,
-          picture: values.picture
-        }
-      })
-    )
+    const formData = new FormData();
+    formData.append('title', values.title);
+    formData.append('description', values.description);
+    formData.append('author', values.author);
+    formData.append('picture', values.picture);
+    dispatch(submitArticle(formData))
       .unwrap()
       .then((val) => {
         if (val.error === false) {

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
@@ -12,15 +12,13 @@ import Chart from 'react-apexcharts';
 import MainCard from '../../../ui-component/cards/MainCard';
 import SkeletonTotalOrderCard from '../../../ui-component/cards/Skeleton/EarningCard';
 
-import ChartDataMonth from './chart-data/total-order-month-line-chart';
-import ChartDataYear from './chart-data/total-order-year-line-chart';
-
 // assets
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { useDispatch, useSelector } from 'react-redux';
+import { getQuestionAll } from '../../../store/actions/QuestionAction';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.dark,
+  backgroundColor: theme.palette.error.light,
   color: '#fff',
   overflow: 'hidden',
   position: 'relative',
@@ -33,7 +31,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     position: 'absolute',
     width: 210,
     height: 210,
-    background: theme.palette.primary[800],
+    background: theme.palette.error.main,
     borderRadius: '50%',
     zIndex: 1,
     top: -85,
@@ -49,7 +47,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     zIndex: 1,
     width: 210,
     height: 210,
-    background: theme.palette.primary[800],
+    background: theme.palette.error.main,
     borderRadius: '50%',
     top: -125,
     right: -15,
@@ -65,11 +63,13 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 const TotalOrderLineChartCard = ({ isLoading }) => {
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const questionState = useSelector((state) => state.question.all);
+  const [values, setValues] = useState(questionState?.length);
 
-  const [timeValue, setTimeValue] = useState(false);
-  const handleChangeTime = (event, newValue) => {
-    setTimeValue(newValue);
-  };
+  useEffect(() => {
+    dispatch(getQuestionAll());
+  }, [dispatch]);
 
   return (
     <>
@@ -87,33 +87,13 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                       sx={{
                         ...theme.typography.commonAvatar,
                         ...theme.typography.largeAvatar,
-                        backgroundColor: theme.palette.primary[800],
+                        backgroundColor: theme.palette.error.main,
                         color: '#fff',
                         mt: 1
                       }}
                     >
                       <LocalMallOutlinedIcon fontSize="inherit" />
                     </Avatar>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      disableElevation
-                      variant={timeValue ? 'contained' : 'text'}
-                      size="small"
-                      sx={{ color: 'inherit' }}
-                      onClick={(e) => handleChangeTime(e, true)}
-                    >
-                      Month
-                    </Button>
-                    <Button
-                      disableElevation
-                      variant={!timeValue ? 'contained' : 'text'}
-                      size="small"
-                      sx={{ color: 'inherit' }}
-                      onClick={(e) => handleChangeTime(e, false)}
-                    >
-                      Year
-                    </Button>
                   </Grid>
                 </Grid>
               </Grid>
@@ -122,39 +102,20 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                   <Grid item xs={6}>
                     <Grid container alignItems="center">
                       <Grid item>
-                        {timeValue ? (
-                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>$108</Typography>
-                        ) : (
-                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>$961</Typography>
-                        )}
-                      </Grid>
-                      <Grid item>
-                        <Avatar
-                          sx={{
-                            ...theme.typography.smallAvatar,
-                            cursor: 'pointer',
-                            backgroundColor: theme.palette.primary[200],
-                            color: theme.palette.primary.dark
-                          }}
-                        >
-                          <ArrowDownwardIcon fontSize="inherit" sx={{ transform: 'rotate3d(1, 1, 1, 45deg)' }} />
-                        </Avatar>
+                        <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 0.2 }}>{values}</Typography>
                       </Grid>
                       <Grid item xs={12}>
                         <Typography
                           sx={{
                             fontSize: '1rem',
                             fontWeight: 500,
-                            color: theme.palette.primary[200]
+                            color: theme.palette.error.dark
                           }}
                         >
-                          Total Order
+                          Total Data
                         </Typography>
                       </Grid>
                     </Grid>
-                  </Grid>
-                  <Grid item xs={6}>
-                    {timeValue ? <Chart {...ChartDataMonth} /> : <Chart {...ChartDataYear} />}
                   </Grid>
                 </Grid>
               </Grid>

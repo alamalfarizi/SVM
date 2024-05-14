@@ -32,6 +32,7 @@ export const getArticleById = createAsyncThunk('article/getDataById', async (id,
 export const updateArticle = createAsyncThunk('article/update', async ({ id, formData }, { rejectWithValue }) => {
   try {
     const response = await ArticleService.put(id, formData);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     if (error.response) {

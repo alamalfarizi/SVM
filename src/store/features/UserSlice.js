@@ -1,20 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  changePasswordUser,
-  changeStatusUser,
-  deleteUser,
-  getUser,
-  getUserAll,
-  getUserById,
-  resetUser,
-  updateUser,
-  userLogin
-} from '../actions/UserAction';
+import { deleteUser, getUser, getUserAll, getUserById, updateUser, userLogin } from '../actions/UserAction';
 
 const initalState = {
   loading: false,
   auth: undefined,
-  users: [],
+  users: {},
   all: [],
   detail: {},
   error: '',
@@ -42,7 +32,8 @@ export const userSlice = createSlice({
     });
     builder.addCase(userLogin.fulfilled, (state, action) => {
       state.loading = false;
-      state.auth = action.payload?.accessToken ?? '';
+      state.auth = action.payload?.token ?? '';
+      state.users = action.payload?.data?.user ?? [];
       state.error = '';
     });
     builder.addCase(userLogin.rejected, (state, action) => {
