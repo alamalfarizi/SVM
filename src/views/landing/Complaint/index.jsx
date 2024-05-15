@@ -189,7 +189,7 @@ const ComplaintPage = () => {
               <Grid item xs={12} md={6} />
               <Grid item xs={12} md={6}>
                 <Button fullWidth type="submit" variant="contained" color="error" sx={{ borderRadius: '8px !important', py: 1.5 }}>
-                  Submit
+                  Tambah Pengaduan
                 </Button>
               </Grid>
             </Grid>

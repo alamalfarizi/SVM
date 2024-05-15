@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Box, Chip, Drawer, Stack, useMediaQuery } from '@mui/material';
+import { Box, Chip, Drawer, Stack, Typography, useMediaQuery } from '@mui/material';
 
 // third-party
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -10,8 +10,6 @@ import { BrowserView, MobileView } from 'react-device-detect';
 
 // project imports
 import MenuList from './MenuList';
-import LogoSection from '../LogoSection';
-import MenuCard from './MenuCard';
 import { drawerWidth } from '../../../store/constant';
 
 // ==============================|| SIDEBAR DRAWER ||============================== //
@@ -19,12 +17,13 @@ import { drawerWidth } from '../../../store/constant';
 const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
   const theme = useTheme();
   const matchUpMd = useMediaQuery(theme.breakpoints.up('md'));
+  
 
   const drawer = (
     <>
       <Box sx={{ display: { xs: 'block', md: 'none' } }}>
         <Box sx={{ display: 'flex', p: 2, mx: 'auto' }}>
-          <LogoSection />
+          <Typography variant="h4" color={'error.main'}>Pengaduan dan Pencegahan</Typography>
         </Box>
       </Box>
       <BrowserView>
@@ -37,19 +36,11 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
           }}
         >
           <MenuList />
-          {/* <MenuCard /> */}
-          {/* <Stack direction="row" justifyContent="center" sx={{ mb: 2 }}>
-            <Chip label={import.meta.env.REACT_APP_VERSION} disabled chipcolor="primary" size="small" sx={{ cursor: 'pointer' }} />
-          </Stack> */}
         </PerfectScrollbar>
       </BrowserView>
       <MobileView>
         <Box sx={{ px: 2 }}>
           <MenuList />
-          {/* <MenuCard /> */}
-          {/* <Stack direction="row" justifyContent="center" sx={{ mb: 2 }}>
-            <Chip label={import.meta.env.REACT_APP_VERSION} disabled chipcolor="secondary" size="small" sx={{ cursor: 'pointer' }} />
-          </Stack> */}
         </Box>
       </MobileView>
     </>

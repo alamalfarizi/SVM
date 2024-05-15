@@ -11,9 +11,6 @@ import NavCollapse from '../NavCollapse';
 // ==============================|| SIDEBAR MENU LIST GROUP ||============================== //
 
 const NavGroup = ({ item }) => {
-  const theme = useTheme();
-
-  // menu list collapse & items
   const items = item.children?.map((menu) => {
     switch (menu.type) {
       case 'collapse':
@@ -31,11 +28,7 @@ const NavGroup = ({ item }) => {
 
   return (
     <>
-      <List>
-        {items}
-      </List>
-
-      {/* group divider */}
+      <List>{items}</List>
       <Divider sx={{ mt: 0.25, mb: 1.25 }} />
     </>
   );

@@ -65,15 +65,7 @@ const EarningCard = ({ isLoading }) => {
   const navigate = useNavigate();
   const pengaduanState = useSelector((state) => state.pengaduan.all);
   const [total, setTotal] = useState(pengaduanState?.length);
-  const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   useEffect(() => {
     dispatch(getPengaduanAll());

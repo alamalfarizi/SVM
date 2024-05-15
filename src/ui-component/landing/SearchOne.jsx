@@ -12,9 +12,9 @@ import PopupState, { bindPopper, bindToggle } from 'material-ui-popup-state';
 import Transitions from '../cards/extended/Transitions';
 
 // assets
-import { IconAdjustmentsHorizontal, IconSearch, IconX } from '@tabler/icons-react';
+import { IconSearch, IconX } from '@tabler/icons-react';
 import { shouldForwardProp } from '@mui/system';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { submitTicket } from '../../store/actions/PengaduanAction';
 import { toastNotif, ToastStatus } from '../../utils/Toast';
@@ -83,6 +83,26 @@ const MobileSearch = ({ value, setValue, handleSubmit, popupState, filter }) => 
               <IconSearch stroke={1.5} size="1.3rem" />
             </HeaderAvatarStyle>
           </ButtonBase>
+          <Box sx={{ ml: 2 }}>
+            <ButtonBase sx={{ borderRadius: '12px' }}>
+              <Avatar
+                variant="rounded"
+                sx={{
+                  ...theme.typography.commonAvatar,
+                  ...theme.typography.mediumAvatar,
+                  background: theme.palette.orange.light,
+                  color: theme.palette.orange.dark,
+                  '&:hover': {
+                    background: theme.palette.orange.dark,
+                    color: theme.palette.orange.light
+                  }
+                }}
+                {...bindToggle(popupState)}
+              >
+                <IconX stroke={1.5} size="1.3rem" />
+              </Avatar>
+            </ButtonBase>
+          </Box>
         </InputAdornment>
       }
       aria-describedby="search-helper-text"
@@ -153,11 +173,11 @@ const SearchOne = () => {
 
   return (
     <>
-      <Box sx={{ display: { xs: 'block', lg: 'none' }, ml: 16, my: 2 }}>
+      <Box sx={{ display: { xs: 'block', lg: 'none' }, my: 2 }}>
         <PopupState variant="popper" popupId="demo-popup-popper">
           {(popupState) => (
             <>
-              <Box sx={{ ml: 2 }}>
+              <Box sx={{ ml: 0 }}>
                 <ButtonBase sx={{ borderRadius: '12px' }}>
                   <HeaderAvatarStyle variant="rounded" {...bindToggle(popupState)}>
                     <IconSearch stroke={1.5} size="1.2rem" />
@@ -204,7 +224,7 @@ const SearchOne = () => {
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           onKeyPress={handleSearchInput}
-          placeholder="Cari pengaduan"
+          placeholder="Cari pengaduan dengan memasukkan tiket pengaduan"
           startAdornment={
             <InputAdornment position="start">
               <IconSearch stroke={1.5} size="1rem" color={theme.palette.grey[500]} />

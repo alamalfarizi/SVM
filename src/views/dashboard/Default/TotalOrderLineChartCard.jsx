@@ -5,8 +5,6 @@ import { useEffect, useState } from 'react';
 import { useTheme, styled } from '@mui/material/styles';
 import { Avatar, Box, Button, Grid, Typography } from '@mui/material';
 
-// third-party
-import Chart from 'react-apexcharts';
 
 // project imports
 import MainCard from '../../../ui-component/cards/MainCard';
