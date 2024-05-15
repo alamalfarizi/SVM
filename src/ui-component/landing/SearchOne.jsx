@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { submitTicket } from '../../store/actions/PengaduanAction';
 import { toastNotif, ToastStatus } from '../../utils/Toast';
+import { useNavigate } from 'react-router';
 
 // styles
 const PopperStyle = styled(Popper, { shouldForwardProp })(({ theme }) => ({
@@ -101,6 +102,7 @@ MobileSearch.propTypes = {
 const SearchOne = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [searchInput, setSearchInput] = useState('');
   const [dataSearch, setDataSearch] = useState();
@@ -108,13 +110,13 @@ const SearchOne = () => {
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       setDataSearch(searchInput);
-      dispatch(submitTicket(searchInput))
+      dispatch(submitTicket({ ticket: searchInput }))
         .unwrap()
         .then((val) => {
           console.log(val);
           if (val.error === false) {
             toastNotif(ToastStatus.SUCCESS, val.message);
-            Navigate(`/result/${val.data.report.id_report}`);
+            navigate(`/result/${val.data.report.id_report}`);
           }
         })
         .catch((error) => {
@@ -122,13 +124,14 @@ const SearchOne = () => {
           toastNotif(ToastStatus.ERROR, error);
         });
     }
-    dispatch(submitTicket(searchInput))
+
+    dispatch(submitTicket({ ticket: searchInput }))
       .unwrap()
       .then((val) => {
         console.log(val);
         if (val.error === false) {
           toastNotif(ToastStatus.SUCCESS, val.message);
-          Navigate(`/result/${val.data.report.id_report}`);
+          navigate(`/result/${val.data.report.id_report}`);
         }
       })
       .catch((error) => {

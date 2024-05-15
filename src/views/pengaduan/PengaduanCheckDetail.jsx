@@ -1,16 +1,16 @@
 // material-ui
+import { Container, Box } from '@mui/material';
 
 // project imports
-import { Box } from '@mui/system';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
 import { getPengaduanById } from '../../store/actions/PengaduanAction';
 
+// components
 import MainCard from '../../ui-component/cards/MainCard';
 import TextFieldCustom from '../../ui-component/TextField';
-import { Container } from '@mui/material';
 import CenteredCircularProgress from '../../ui-component/CircularProgress';
 
 const DataCheckDetail = () => {
@@ -27,6 +27,11 @@ const DataCheckDetail = () => {
         label: 'Nomor Identitas',
         value: data.identification_number,
         display: data.identification_number
+      },
+      {
+        label: 'Nomor Tiket ',
+        value: data.ticket,
+        display: data.ticket
       },
       { label: 'Info Kontak', value: data.contact_info, display: data.contact_info },
       { label: 'Status Pelapor', value: data.reporter_status, display: data.reporter_status },

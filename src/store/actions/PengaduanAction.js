@@ -70,6 +70,7 @@ export const deletePengaduan = createAsyncThunk('pengaduan/delete', async (id, {
 
 export const submitTicket = createAsyncThunk('pengaduan/ticket', async (formData, { rejectWithValue }) => {
   try {
+    console.log(formData)
     const response = await PengaduanService.postTikcket(formData);
     console.log(response.data);
     return response.data;

@@ -21,7 +21,7 @@ const remove = (id) => {
 };
 
 const postTikcket = (data) => {
-  return http.post('/ticket', data);
+  return http.post('/report/ticket', data);
 };
 
 const PengaduanService = {

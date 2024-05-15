@@ -57,10 +57,10 @@ const TotalGrowthBarChart = ({ isLoading }) => {
       data
     }));
   };
-  
+
   useEffect(() => {
     dispatch(getPengaduanAll());
-  }, [dispatch]);
+  }, [dispatch, pengaduanState]);
 
   useEffect(() => {
     const newChartData = {

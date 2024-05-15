@@ -27,14 +27,13 @@ const DataDetail = () => {
   useEffect(() => {
     if (id) {
       dispatch(getQuestionById(id));
-      setUpdated({
-        question_id: questionState.question_id,
-        question_text: questionState.question_text,
-        answers: questionState.answers
-      });
     }
-    console.log(questionState);
-  }, [dispatch, id]);
+    setUpdated({
+      question_id: questionState.question_id,
+      question_text: questionState.question_text,
+      answers: questionState.answers
+    });
+  }, [dispatch, id, questionState]);
 
   const handleAnswerChange = (index, value) => {
     const updatedAnswers = [...updated.answers];
@@ -65,7 +64,6 @@ const DataDetail = () => {
       question,
       answer: answers
     };
-    console.log(data);
 
     dispatch(updateQuestion({ id, formData: data }))
       .unwrap()
@@ -158,7 +156,6 @@ const DataDetail = () => {
           />
         )}
       </MainCard>
-    
     </>
   );
 };
