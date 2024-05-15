@@ -16,6 +16,7 @@ import SkeletonTotalOrderCard from '../../../ui-component/cards/Skeleton/Earning
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import { useDispatch, useSelector } from 'react-redux';
 import { getQuestionAll } from '../../../store/actions/QuestionAction';
+import { useNavigate } from 'react-router';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.error.light,
@@ -64,6 +65,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 const TotalOrderLineChartCard = ({ isLoading }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const questionState = useSelector((state) => state.question.all);
   const [values, setValues] = useState(questionState?.length);
 
@@ -79,30 +81,27 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
         <CardWrapper border={false} content={false}>
           <Box sx={{ p: 2.25 }}>
             <Grid container direction="column">
-              <Grid item>
-                <Grid container justifyContent="space-between">
-                  <Grid item>
-                    <Avatar
-                      variant="rounded"
-                      sx={{
-                        ...theme.typography.commonAvatar,
-                        ...theme.typography.largeAvatar,
-                        backgroundColor: theme.palette.error.main,
-                        color: '#fff',
-                        mt: 1
-                      }}
-                    >
-                      <LocalMallOutlinedIcon fontSize="inherit" />
-                    </Avatar>
-                  </Grid>
-                </Grid>
+              <Grid item sx={{ ml: -1.6 }}>
+                <Button onClick={() => navigate(`/data/data-check`)}>
+                  <Avatar
+                    variant="rounded"
+                    sx={{
+                      ...theme.typography.commonAvatar,
+                      ...theme.typography.largeAvatar,
+                      backgroundColor: theme.palette.error.main,
+                      color: '#fff'
+                    }}
+                  >
+                    <LocalMallOutlinedIcon fontSize="inherit" />
+                  </Avatar>
+                </Button>
               </Grid>
-              <Grid item sx={{ mb: 0.75 }}>
+              <Grid item sx={{ mb: 3 }}>
                 <Grid container alignItems="center">
-                  <Grid item xs={6}>
+                  <Grid item xs={12}>
                     <Grid container alignItems="center">
                       <Grid item>
-                        <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 0.2 }}>{values}</Typography>
+                        <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 2, mt: 0.2 }}>{values}</Typography>
                       </Grid>
                       <Grid item xs={12}>
                         <Typography
@@ -112,7 +111,7 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                             color: theme.palette.error.dark
                           }}
                         >
-                          Total Data
+                          Total Data Pertanyaan
                         </Typography>
                       </Grid>
                     </Grid>

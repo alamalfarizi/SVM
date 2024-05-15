@@ -21,6 +21,9 @@ export const userLogin = createAsyncThunk('auth/register', async (props, { rejec
   }
 });
 
+
+// ===========================================|| BATAS ||=======================================================//
+
 export const getUserAll = createAsyncThunk('user/all', async (payload, { rejectWithValue }) => {
   try {
     const response = await UserService.getAll();

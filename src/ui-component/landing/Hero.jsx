@@ -10,7 +10,7 @@ const HeroLayoutRoot = styled('section')(({ theme }) => ({
   alignItems: 'center',
   height: '35vh',
   [theme.breakpoints.up('sm')]: {
-    height: '60vh',
+    height: '50vh',
     minHeight: 450,
     maxHeight: 1100
   }

@@ -8,7 +8,6 @@ import { Alert, Box, Divider, Grid, Stack, Typography, useMediaQuery } from '@mu
 import AuthWrapper1 from '../AuthWrapper1';
 import AuthCardWrapper from '../AuthCardWrapper';
 import AuthLogin from '../auth-forms/AuthLogin';
-import Logo from '../../../../ui-component/Logo';
 import { useState } from 'react';
 
 // assets
@@ -28,8 +27,8 @@ const Login = () => {
     <AuthWrapper1>
       <Grid container direction="column" justifyContent="flex-end" sx={{ minHeight: '100vh' }}>
         <Box sx={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 1, paddingX: 2}}>
-          <img src='/logo_poltek.png' alt='' width={50} height={50} />
-          <img src='/logo_vokasi.png' alt='' width={80} height={80}/>
+          <img src='/poltek.svg' alt='' width={50} height={50} />
+          <img src='/vokasi.svg' alt='' width={80} height={80}/>
         </Box>
         <Grid item xs={12}>
           <Grid container justifyContent="center" alignItems="center" sx={{ minHeight: 'calc(100vh - 68px)' }}>

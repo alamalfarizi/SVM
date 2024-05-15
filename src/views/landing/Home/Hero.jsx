@@ -9,7 +9,7 @@ import SearchOne from '../../../ui-component/landing/SearchOne';
 // ==============================|| HERO SECTION ||============================== //
 
 const HeroSection = () => {
-  const backgroundImage = 'https://res.cloudinary.com/ddugt5n5v/image/upload/v1715240242/SKRIPSI/images_dy1wrd.jpg';
+  const backgroundImage = '/public.svg';
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 

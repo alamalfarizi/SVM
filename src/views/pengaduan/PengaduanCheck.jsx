@@ -28,7 +28,7 @@ const PengaduanCheck = () => {
   const pageCount = Math.ceil(rowsState.length / rowsPerPage);
   const rows = rowsState.slice((page - 1) * rowsPerPage, page * rowsPerPage);
 
-  const tableHeaders = ['Kode Pengaduan', 'Reporter Name', 'Identification Number', 'Contact Info', 'Reporter Status', 'Report Status'];
+  const tableHeaders = ['Kode Pengaduan', 'Nama Pelapor', 'Nomor Identitas', 'Informasi Kontak', 'Status Pelapor', 'Tingkat Cluster'];
   const tableActions = [
     {
       title: 'Detail',
@@ -130,17 +130,7 @@ const PengaduanCheck = () => {
               <TableCell>{rowData.identification_number}</TableCell>
               <TableCell>{rowData.contact_info ?? '-'}</TableCell>
               <TableCell>{rowData.reporter_status ?? '-'}</TableCell>
-              <TableCell>
-                <Chip
-                  size="small"
-                  label={rowData.report_status}
-                  color={rowData.report_status === 'waiting' ? 'error' : 'success'}
-                  sx={{
-                    padding: '6px',
-                    width: ' 100px'
-                  }}
-                />
-              </TableCell>
+              <TableCell>{rowData?.cluster?.cluster_level}</TableCell>
             </>
           )}
         </TableList>

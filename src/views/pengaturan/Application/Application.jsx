@@ -12,10 +12,7 @@ import MainCard from '../../../ui-component/cards/MainCard';
 
 //======================================================|| APPLICATION ||=======================================================//
 export default function ApplicationPage() {
-
   const appDetail = useSelector((state) => state.user.users);
-
- 
 
   function transformData(data) {
     return [
@@ -26,18 +23,7 @@ export default function ApplicationPage() {
         value: data?.username,
         display: data?.username ?? '-'
       },
-      { label: 'Email', value: data?.email, display: data?.email ?? '-' },
-
-      {
-        label: 'Kelurahan',
-        value: data?.kelurahan_from_setting_aplikasi_obj?.nama_kelurahan ?? '',
-        display: data?.kelurahan_from_setting_aplikasi_obj?.nama_kelurahan ?? '-'
-      },
-      {
-        label: 'Kecamatan',
-        value: data?.kecamatan_from_setting_aplikasi_obj?.nama_kecamatan ?? '',
-        display: data?.kecamatan_from_setting_aplikasi_obj?.nama_kecamatan ?? '-'
-      }
+      { label: 'Email', value: data?.email, display: data?.email ?? '-' }
     ];
   }
 
@@ -72,17 +58,6 @@ export default function ApplicationPage() {
             <CustomColumn dataProperties={transformData(appDetail)} />
           </Grid>
         </Grid>
-
-        {/* <Button
-          component={Link}
-          to={{ pathname: appDetail ? `/pengaturan/aplikasi/edit/${appDetail.id_setting}` : `/pengaturan/aplikasi/add` }}
-          variant="contained"
-          color={'secondary'}
-          sx={{ my: 3, float: 'right' }}
-        >
-          {appDetail ? 'Ubah' : 'Buat'}
-        </Button> */}
-
       </Box>
     </MainCard>
   );

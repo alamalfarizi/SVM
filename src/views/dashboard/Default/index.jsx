@@ -9,14 +9,23 @@ import TotalOrderLineChartCard from './TotalOrderLineChartCard';
 import TotalIncomeDarkCard from './TotalIncomeDarkCard';
 import TotalGrowthBarChart from './TotalGrowthBarChart';
 import { gridSpacing } from '../../../store/constant';
+import { useDispatch } from 'react-redux';
+import { getPengaduanAll } from '../../../store/actions/PengaduanAction';
+import { getArticleAll } from '../../../store/actions/ArticleAction';
+import { getQuestionAll } from '../../../store/actions/QuestionAction';
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
 const Dashboard = () => {
   const [isLoading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setLoading(false);
-  }, []);
+    dispatch(getArticleAll());
+    dispatch(getPengaduanAll());
+    dispatch(getQuestionAll());
+  }, [dispatch]);
 
   return (
     <Grid container spacing={gridSpacing}>

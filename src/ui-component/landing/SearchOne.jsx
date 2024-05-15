@@ -70,7 +70,7 @@ const MobileSearch = ({ value, setValue, handleSubmit, popupState, filter }) => 
       id="input-search-header"
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      placeholder="Search"
+      placeholder="Cari pengaduan"
       startAdornment={
         <InputAdornment position="start">
           <IconSearch stroke={1.5} size="1rem" color={theme.palette.grey[500]} />
@@ -121,7 +121,7 @@ const SearchOne = () => {
         })
         .catch((error) => {
           console.log(error);
-          toastNotif(ToastStatus.ERROR, error);
+          toastNotif(ToastStatus.ERROR, 'engaduan tidak ditemukan');
         });
     }
 
@@ -135,9 +135,16 @@ const SearchOne = () => {
         }
       })
       .catch((error) => {
-        console.log(error);
-        toastNotif(ToastStatus.ERROR, error);
+        toastNotif(ToastStatus.ERROR, 'Pengaduan tidak ditemukan');
       });
+  };
+
+  const handleSearchInput = (event) => {
+    if (searchInput === '') {
+      toastNotif(ToastStatus.ERROR, 'Masukkan tiket pengaduan');
+    } else {
+      handleKeyPress(event);
+    }
   };
 
   useEffect(() => {
@@ -177,7 +184,7 @@ const SearchOne = () => {
                                 value={searchInput}
                                 setValue={setSearchInput}
                                 popupState={popupState}
-                                handleSubmit={handleKeyPress}
+                                handleSubmit={handleSearchInput}
                               />
                             </Grid>
                           </Grid>
@@ -196,8 +203,8 @@ const SearchOne = () => {
           id="input-search-header"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          onKeyPress={handleKeyPress}
-          placeholder="Search"
+          onKeyPress={handleSearchInput}
+          placeholder="Cari pengaduan"
           startAdornment={
             <InputAdornment position="start">
               <IconSearch stroke={1.5} size="1rem" color={theme.palette.grey[500]} />
@@ -205,7 +212,7 @@ const SearchOne = () => {
           }
           endAdornment={
             <InputAdornment position="end">
-              <ButtonBase sx={{ borderRadius: '12px' }} onClick={handleKeyPress}>
+              <ButtonBase sx={{ borderRadius: '12px' }} onClick={handleSearchInput}>
                 <HeaderAvatarStyle variant="rounded">
                   <IconSearch stroke={1.5} size="1.3rem" />
                 </HeaderAvatarStyle>

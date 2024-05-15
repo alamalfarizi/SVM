@@ -8,7 +8,7 @@ import { getArticleAll } from '../../../store/actions/ArticleAction';
 import CenteredCircularProgress from '../../../ui-component/CircularProgress';
 
 const ArticlePage = () => {
-  const backgroundImage = 'https://res.cloudinary.com/ddugt5n5v/image/upload/v1715240242/SKRIPSI/images_dy1wrd.jpg';
+  const backgroundImage = '/public.svg';
   const dispacth = useDispatch();
   const { loading, error } = useSelector((state) => state.article);
   const articleData = useSelector((state) => state.article);

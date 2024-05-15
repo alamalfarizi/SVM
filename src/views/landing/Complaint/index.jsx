@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router';
 import CenteredCircularProgress from '../../../ui-component/CircularProgress';
 
 const ComplaintPage = () => {
-  const backgroundImage = 'https://res.cloudinary.com/ddugt5n5v/image/upload/v1715240242/SKRIPSI/images_dy1wrd.jpg';
+  const backgroundImage = '/public.svg';
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isConfirmDialog, setConfirmDialog] = useState(false);
