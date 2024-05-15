@@ -110,7 +110,7 @@ const DataCheck = () => {
           searchQuery={search}
           //   onInputChange={handleChangeSearch} // Pass the input change handler
         />
-        <Button
+        {/* <Button
           type="submit"
           variant="contained"
           onClick={() => setFilterDialog(true)}
@@ -118,7 +118,7 @@ const DataCheck = () => {
           sx={{ width: '100px', mb: 2, borderRadius: '10px' }}
         >
           Filter
-        </Button>
+        </Button> */}
       </Box>
       {loading ? (
         <Box>

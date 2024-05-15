@@ -1,32 +1,30 @@
-import { Alert, Button, Grid, Icon } from '@mui/material';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import CustomColumn from '../../../ui-component/CustomColumn';
-import MainCard from '../../../ui-component/cards/MainCard';
+//import mui material
+import { Grid, Icon } from '@mui/material';
 import { Box } from '@mui/system';
 import { Image } from '@mui/icons-material';
-import { getUserById } from '../../../store/actions/UserAction';
-import { getQuestionAll } from '../../../store/actions/QuestionAction';
 
+// third party
+import { useSelector } from 'react-redux';
+
+// components
+import CustomColumn from '../../../ui-component/CustomColumn';
+import MainCard from '../../../ui-component/cards/MainCard';
+
+//======================================================|| APPLICATION ||=======================================================//
 export default function ApplicationPage() {
-  const dispatch = useDispatch();
-  const appDetail = useSelector((state) => state.question.all);
-  const id = 9;
 
-  useEffect(() => {
-    console.log(appDetail);
-    dispatch(getQuestionAll());
-  }, [dispatch]);
+  const appDetail = useSelector((state) => state.user.users);
+
+ 
 
   function transformData(data) {
     return [
-      { label: 'Nama Lengkap', value: data?.user?.name, display: data?.user?.name ?? '-' },
-      { label: 'Nim', value: data?.user?.nim, display: data?.user?.nim ?? '-' },
+      { label: 'Nama Lengkap', value: data?.name, display: data?.name ?? '-' },
+      { label: 'Nim', value: data?.nip, display: data?.nip ?? '-' },
       {
         label: 'Username',
-        value: data?.user?.username,
-        display: data?.user?.username ?? '-'
+        value: data?.username,
+        display: data?.username ?? '-'
       },
       { label: 'Email', value: data?.email, display: data?.email ?? '-' },
 
@@ -75,7 +73,7 @@ export default function ApplicationPage() {
           </Grid>
         </Grid>
 
-        <Button
+        {/* <Button
           component={Link}
           to={{ pathname: appDetail ? `/pengaturan/aplikasi/edit/${appDetail.id_setting}` : `/pengaturan/aplikasi/add` }}
           variant="contained"
@@ -83,7 +81,8 @@ export default function ApplicationPage() {
           sx={{ my: 3, float: 'right' }}
         >
           {appDetail ? 'Ubah' : 'Buat'}
-        </Button>
+        </Button> */}
+
       </Box>
     </MainCard>
   );

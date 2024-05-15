@@ -1,5 +1,5 @@
 // material-ui
-import { Alert, Button, TableCell, Box} from '@mui/material';
+import { Alert, Button, TableCell, Box } from '@mui/material';
 
 // project imports
 import { useEffect, useState } from 'react';
@@ -105,7 +105,7 @@ const ArticleCheck = () => {
           searchQuery={search}
           //   onInputChange={handleChangeSearch} // Pass the input change handler
         />
-        <Button
+        {/* <Button
           type="submit"
           variant="contained"
           //   onClick={() => setFilterDialog(true)}
@@ -113,7 +113,7 @@ const ArticleCheck = () => {
           sx={{ width: '100px', mb: 2, borderRadius: '10px' }}
         >
           Filter
-        </Button>
+        </Button> */}
       </Box>
       {loading ? (
         <Box>

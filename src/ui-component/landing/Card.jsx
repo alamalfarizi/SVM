@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Typography, useTheme } from '@mui/material';
+import { Box, Card, Typography, useTheme } from '@mui/material';
 import React from 'react';
 
 const CardLanding = ({ article }) => {

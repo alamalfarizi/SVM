@@ -25,7 +25,6 @@ const ArticleDetailPage = Loadable(lazy(() => import('../views/article/ArticleDe
 const ArticleAddPage = Loadable(lazy(() => import('../views/article/ArticleAdd')));
 
 // Pengaturan
-import AccountRoutes from './pengaturan/account-routers';
 import ApplicationRoutes from './pengaturan/application-routers';
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -112,7 +111,7 @@ const MainRoutes = {
     // Pengaturan
     {
       path: 'pengaturan',
-      children: [...AccountRoutes, ...ApplicationRoutes]
+      children: [...ApplicationRoutes]
     }
   ]
 };

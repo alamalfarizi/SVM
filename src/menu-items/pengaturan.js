@@ -18,12 +18,6 @@ const pengaturan = {
       icon: icons.IconSettings,
       children: [
         {
-          id: 'akun',
-          title: 'Akun',
-          type: 'item',
-          url: '/pengaturan/akun'
-        },
-        {
           id: 'aplikasi',
           title: 'Aplikasi',
           type: 'item',

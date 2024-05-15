@@ -1,26 +1,47 @@
 import React, { useEffect } from 'react';
 import PublicLayout from '../../../layout/LandingLayout';
 import Hero from '../../../ui-component/landing/Hero';
-import { Box, Container} from '@mui/material';
+import { Box, Container, IconButton, Tooltip } from '@mui/material';
 import MainCard from '../../../ui-component/cards/MainCard';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPengaduanById } from '../../../store/actions/PengaduanAction';
 import CustomColumn from '../../../ui-component/CustomColumn';
 import CenteredCircularProgress from '../../../ui-component/CircularProgress';
+import { ContentCopy } from '@mui/icons-material';
+import { toastNotif, ToastStatus } from '../../../utils/Toast';
 
 const ResultByIdPage = () => {
   const backgroundImage = 'https://res.cloudinary.com/ddugt5n5v/image/upload/v1715240242/SKRIPSI/images_dy1wrd.jpg';
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { loading} = useSelector((state) => state.pengaduan);
+  const { loading } = useSelector((state) => state.pengaduan);
   const pengaduanState = useSelector((state) => state.pengaduan.detail);
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text).then(() => {
+      toastNotif(ToastStatus.SUCCESS, 'Text copied to clipboard');
+    });
+  };
 
   function transformData(data) {
     return [
       { label: 'Kode Pengaduan', value: data?.id_report, display: data?.id_report },
       { label: 'Nama Pelapor', value: data?.reporter_name, display: data?.reporter_name },
-      { label: 'Tiket', value: data?.ticket, display: data?.ticket },
+      {
+        label: 'Tiket',
+        value: data?.ticket,
+        display: (
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            {data?.ticket}
+            <Tooltip title="Copy to clipboard">
+              <IconButton onClick={() => copyToClipboard(data?.ticket)} size="small" sx={{ ml: 1 }}>
+                <ContentCopy fontSize="small" />
+              </IconButton>
+            </Tooltip>
+          </Box>
+        )
+      },
       {
         label: 'Identification Number',
         value: data?.identification_number,

@@ -4,7 +4,7 @@ import Hero from '../../../ui-component/landing/Hero';
 import CardLanding from '../../../ui-component/landing/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getArticleAll, getArticleById } from '../../../store/actions/ArticleAction';
+import { getArticleAll } from '../../../store/actions/ArticleAction';
 import CenteredCircularProgress from '../../../ui-component/CircularProgress';
 
 const ArticlePage = () => {
