@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <PublicLayout>
       <HeroSection/>
-      <ProcedureSection/>
+      {/* <ProcedureSection/> */}
     </PublicLayout>
   );
 };
