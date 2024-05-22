@@ -72,22 +72,13 @@ function HeaderPubblicLayout() {
             }}
           >
             <Box>
-              <Link href="/" variant={isMobile ? 'h6' : 'h3'} color={theme.palette.error.main} underline="none">
-                Pengaduan dan Pencegahan Kekerasan Seksual
+              <Link href="/" variant={isMobile ? 'h6' : 'h3'} color={theme.palette.success.main} underline="none">
+                Prediksi Penjualan Terlaris
               </Link>
             </Box>
 
             <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 3 }}>
-              <Button variant="text" color="error" size="small" onClick={() => navigate('/')}>
-                Beranda
-              </Button>
-              <Button variant="text" color="error" size="small" onClick={() => navigate('/pengaduan')}>
-                Pengaduan
-              </Button>
-              <Button variant="text" color="error" size="small" onClick={() => navigate('/artikel')}>
-                Artikel
-              </Button>
-              <Button variant="contained" color="error" size="small" sx={{ minWidth: 0 }} onClick={() => navigate('/login')}>
+              <Button variant="contained" color="success" size="small" sx={{ minWidth: 0 }} onClick={() => navigate('/login')}>
                 Login
               </Button>
             </Box>
@@ -95,7 +86,7 @@ function HeaderPubblicLayout() {
 
           <Box sx={{ display: { sm: 'flex', md: 'none' } }}>
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
-              <MenuIcon sx={{ color: theme.palette.error.main }} />
+              <MenuIcon sx={{ color: theme.palette.success.main }} />
             </IconButton>
             <Drawer anchor="top" open={open} onClose={toggleDrawer(false)}>
               <Box
@@ -116,11 +107,9 @@ function HeaderPubblicLayout() {
                   </IconButton>
                 </Box>
                 <Divider sx={{ my: 3 }} />
-                <MenuItem onClick={() => navigate('/')}>Beranda</MenuItem>
-                <MenuItem onClick={() => navigate('/pengaduan')}>Pengaduan</MenuItem>
-                <MenuItem onClick={() => navigate('/artikel')}>Artikel</MenuItem>
+               
                 <MenuItem>
-                  <Button variant="contained" color="error" size="small" onClick={() => navigate('/login')}>
+                  <Button variant="contained" color="success" size="small" onClick={() => navigate('/login')}>
                     Login
                   </Button>
                 </MenuItem>

@@ -37,6 +37,7 @@ export const articleSlice = createSlice({
     builder.addCase(updateArticle.pending, (state) => {
       state.loading = true;
     });
+    
     builder.addCase(updateArticle.fulfilled, (state, action) => {
       state.loading = false;
       state.error = '';
@@ -63,6 +64,7 @@ export const articleSlice = createSlice({
       (state.loading = false), (state.detail = action.payload.data);
       state.error = '';
     });
+    
     builder.addCase(deleteArticle.rejected, (state, action) => {
       state.loading = false;
     });

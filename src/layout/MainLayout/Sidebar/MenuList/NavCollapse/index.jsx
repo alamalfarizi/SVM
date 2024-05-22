@@ -117,9 +117,9 @@ const NavCollapse = ({ menu, level }) => {
           sx={{
             my: 'auto',
             minWidth: !menu.icon ? 18 : 36,
-            color: selected === menu.id ? theme.palette.error.dark : 'inherit',
+            color: selected === menu.id ? theme.palette.success.dark : 'inherit',
             '&:hover, &:focus': { color: theme.palette.primary.main },
-            '& svg': { color: selected === menu.id ? theme.palette.error.dark : 'inherit' }
+            '& svg': { color: selected === menu.id ? theme.palette.success.dark : 'inherit' }
           }}
         >
           {menuIcon}
@@ -128,7 +128,7 @@ const NavCollapse = ({ menu, level }) => {
           primary={
             <Typography
               variant={'body1'}
-              color={selected === menu.id ? theme.palette.error.dark : 'inherit'}
+              color={selected === menu.id ? theme.palette.success.dark : 'inherit'}
               sx={{ my: 'auto' }}
             >
               {menu.title}
@@ -170,7 +170,7 @@ const NavCollapse = ({ menu, level }) => {
               height: '100%',
               width: '1px',
               opacity: 1,
-              background: theme.palette.error.light
+              background: theme.palette.success.light
             }
           }}
         >

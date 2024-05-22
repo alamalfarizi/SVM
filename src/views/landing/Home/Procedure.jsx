@@ -27,9 +27,7 @@ function ProcedureSection() {
           alignItems: 'center'
         }}
       >
-        <Typography variant="h1" marked="center" color={'error'} sx={{ mb: 4 }}>
-          Penggunaan Aplikasi
-        </Typography>
+        
         <div>
           <Grid container spacing={3}>
             {ADVANTAGE_DATA.map((advantage, index) => (

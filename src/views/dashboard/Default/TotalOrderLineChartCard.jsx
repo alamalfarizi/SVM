@@ -17,7 +17,7 @@ import { getQuestionAll } from '../../../store/actions/QuestionAction';
 import { useNavigate } from 'react-router';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
-  backgroundColor: theme.palette.error.light,
+  backgroundColor: theme.palette.success.light,
   color: '#fff',
   overflow: 'hidden',
   position: 'relative',
@@ -30,7 +30,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     position: 'absolute',
     width: 210,
     height: 210,
-    background: theme.palette.error.main,
+    background: theme.palette.success.main,
     borderRadius: '50%',
     zIndex: 1,
     top: -85,
@@ -46,7 +46,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     zIndex: 1,
     width: 210,
     height: 210,
-    background: theme.palette.error.main,
+    background: theme.palette.success.main,
     borderRadius: '50%',
     top: -125,
     right: -15,
@@ -86,7 +86,7 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                     sx={{
                       ...theme.typography.commonAvatar,
                       ...theme.typography.largeAvatar,
-                      backgroundColor: theme.palette.error.main,
+                      backgroundColor: theme.palette.success.main,
                       color: '#fff'
                     }}
                   >
@@ -106,7 +106,7 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                           sx={{
                             fontSize: '1rem',
                             fontWeight: 500,
-                            color: theme.palette.error.dark
+                            color: theme.palette.primary.light
                           }}
                         >
                           Total Data Pertanyaan

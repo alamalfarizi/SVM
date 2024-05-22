@@ -83,16 +83,16 @@ const NavItem = ({ item, level }) => {
         py: level > 1 ? 1 : 1.25,
         pl: `${level * 24}px`,
         '&:hover, &:focus': {
-          backgroundColor: theme.palette.error.light,
-          color: theme.palette.error.dark,
-          '& .MuiListItemIcon-root': { color: theme.palette.error.dark }
+          backgroundColor: theme.palette.success.light,
+          color: theme.palette.success.dark,
+          '& .MuiListItemIcon-root': { color: theme.palette.success.dark }
         },
         '&.Mui-selected': {
-          backgroundColor: theme.palette.error.light,
-          color: theme.palette.error.dark,
-          '& .MuiListItemIcon-root': { color: theme.palette.error.dark },
-          '&:hover': { backgroundColor: theme.palette.error.light },
-          '&:before': { backgroundColor: theme.palette.error.light }
+          backgroundColor: theme.palette.success.light,
+          color: theme.palette.success.dark,
+          '& .MuiListItemIcon-root': { color: theme.palette.success.dark },
+          '&:hover': { backgroundColor: theme.palette.success.light },
+          '&:before': { backgroundColor: theme.palette.success.light }
         }
       }}
       selected={customization.isOpen.findIndex((id) => id === item.id) > -1}

@@ -71,7 +71,8 @@ export const applicationSlice = createSlice({
       state.loading = false;
       state.error = '';
     });
-    builder.addCase(deleteApplication.rejected, (state, action) => {
+
+   builder.addCase(deleteApplication.rejected, (state, action) => {
       state.loading = false;
     });
   }

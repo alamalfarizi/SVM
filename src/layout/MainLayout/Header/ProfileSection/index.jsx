@@ -80,14 +80,14 @@ const ProfileSection = () => {
           alignItems: 'center',
           borderRadius: '27px',
           transition: 'all .2s ease-in-out',
-          borderColor: theme.palette.error.light,
-          backgroundColor: theme.palette.error.light,
+          borderColor: theme.palette.success.light,
+          backgroundColor: theme.palette.success.light,
           '&[aria-controls="menu-list-grow"], &:hover': {
-            borderColor: theme.palette.error.main,
-            background: `${theme.palette.error.main}!important`,
-            color: theme.palette.error.light,
+            borderColor: theme.palette.success.main,
+            background: `${theme.palette.success.main}!important`,
+            color: theme.palette.success.light,
             '& svg': {
-              stroke: theme.palette.error.light
+              stroke: theme.palette.success.light
             }
           },
           '& .MuiChip-label': {
@@ -108,7 +108,7 @@ const ProfileSection = () => {
             color="inherit"
           />
         }
-        label={<IconSettings stroke={1.5} size="1.5rem" color={theme.palette.error.main} />}
+        label={<IconSettings stroke={1.5} size="1.5rem" color={theme.palette.success.main} />}
         variant="outlined"
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
@@ -170,12 +170,12 @@ const ProfileSection = () => {
                         }}
                       >
                         <ListItemButton
-                          sx={{ borderRadius: `12px`, '&:hover': { backgroundColor: theme.palette.error.light } }}
+                          sx={{ borderRadius: `12px`, '&:hover': { backgroundColor: theme.palette.success.light } }}
                           selected={selectedIndex === 4}
                           onClick={handleLogout}
                         >
                           <ListItemIcon>
-                            <IconLogout stroke={1.5} size="1.3rem" color={theme.palette.error.main} />
+                            <IconLogout stroke={1.5} size="1.3rem" color={theme.palette.success.main} />
                           </ListItemIcon>
                           <ListItemText primary={<Typography variant="body2">Logout</Typography>} />
                         </ListItemButton>

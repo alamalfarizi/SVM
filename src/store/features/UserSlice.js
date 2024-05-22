@@ -96,7 +96,8 @@ export const userSlice = createSlice({
       state.loading = false;
       state.error = '';
     });
-    builder.addCase(deleteUser.rejected, (state, action) => {
+
+   builder.addCase(deleteUser.rejected, (state, action) => {
       state.loading = false;
     });
   }

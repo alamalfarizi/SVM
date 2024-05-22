@@ -9,7 +9,7 @@ import SearchOne from '../../../ui-component/landing/SearchOne';
 // ==============================|| HERO SECTION ||============================== //
 
 const HeroSection = () => {
-  const backgroundImage = '/public.svg';
+  const backgroundImage = '/Coffe.jpg';
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -24,7 +24,7 @@ const HeroSection = () => {
       >
         <Box sx={{ width: isMobile ? '90%' : '60%', paddingTop: isMobile ? 9 : 0 }}>
           <Typography color="inherit" variant={isMobile ? 'h4' : 'h1'}>
-            Selamat Datang Di Website Pengaduan dan Pengcegahan Kekerasan Seksual di Politeknik Negeri Lhokseumawe
+            Selamat Datang di Sistem Prediksi Penjualan Produk Terlaris Pada COFFEE SHOP
           </Typography>
           <Box sx={{ marginTop: isMobile ? 2 : 4 }}>
             <SearchOne />

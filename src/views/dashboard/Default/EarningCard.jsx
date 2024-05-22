@@ -22,7 +22,7 @@ import { getPengaduanAll } from '../../../store/actions/PengaduanAction';
 import { useNavigate } from 'react-router';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
-  backgroundColor: theme.palette.error.dark,
+  backgroundColor: theme.palette.success.dark,
   color: '#fff',
   overflow: 'hidden',
   position: 'relative',
@@ -31,7 +31,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     position: 'absolute',
     width: 210,
     height: 210,
-    background: theme.palette.error.light,
+    background: theme.palette.success.light,
     borderRadius: '50%',
     top: -85,
     right: -95,
@@ -45,7 +45,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     position: 'absolute',
     width: 210,
     height: 210,
-    background: theme.palette.error.light,
+    background: theme.palette.success.light,
     borderRadius: '50%',
     top: -125,
     right: -15,
@@ -88,7 +88,7 @@ const EarningCard = ({ isLoading }) => {
                         sx={{
                           ...theme.typography.commonAvatar,
                           ...theme.typography.largeAvatar,
-                          backgroundColor: theme.palette.error.light,
+                          backgroundColor: theme.palette.success.light,
                           mt: 1
                         }}
                       >
@@ -109,8 +109,8 @@ const EarningCard = ({ isLoading }) => {
                       sx={{
                         cursor: 'pointer',
                         ...theme.typography.smallAvatar,
-                        backgroundColor: theme.palette.error.light,
-                        color: theme.palette.error.dark
+                        backgroundColor: theme.palette.success.light,
+                        color: theme.palette.success.dark
                       }}
                     >
                       <ArrowUpwardIcon fontSize="inherit" sx={{ transform: 'rotate3d(1, 1, 1, 45deg)' }} />

@@ -160,7 +160,7 @@ const AuthLogin = ({ handleErrorLogin, ...others }) => {
 
             <Box sx={{ mt: 2 }}>
               <AnimateButton>
-                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="error">
+                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="success">
                   Login
                 </Button>
               </AnimateButton>

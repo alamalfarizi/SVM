@@ -23,7 +23,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
     <>
       <Box sx={{ display: { xs: 'block', md: 'none' } }}>
         <Box sx={{ display: 'flex', p: 2, mx: 'auto' }}>
-          <Typography variant="h4" color={'error.main'}>Pengaduan dan Pencegahan</Typography>
+          <Typography variant="h4" color={'success.main'}>Prediksi Penjualan Terlaris </Typography>
         </Box>
       </Box>
       <BrowserView>
@@ -60,7 +60,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             background: theme.palette.background.default,
-            color: theme.palette.error.light,
+            color: theme.palette.success.light,
             borderRight: 'none',
             [theme.breakpoints.up('md')]: {
               top: '88px'
@@ -68,7 +68,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
           }
         }}
         ModalProps={{ keepMounted: true }}
-        color={theme.palette.error.light}
+        color={theme.palette.su.light}
       >
         {drawer}
       </Drawer>

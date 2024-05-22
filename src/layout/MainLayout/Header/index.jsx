@@ -33,8 +33,8 @@ const Header = ({ handleLeftDrawerToggle }) => {
       >
         <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
           <Stack alignItems="center" justifyContent="center" sx={{ height: '100%' }}>
-            <Typography color={theme.palette.error.main} gutterBottom variant="h4">
-              KEKERASAN SEKSUAL
+            <Typography color={theme.palette.success.main} gutterBottom variant="h4">
+              K
             </Typography>
           </Stack>
         </Box>
@@ -45,11 +45,11 @@ const Header = ({ handleLeftDrawerToggle }) => {
               ...theme.typography.commonAvatar,
               ...theme.typography.mediumAvatar,
               transition: 'all .2s ease-in-out',
-              background: theme.palette.error.light,
-              color: theme.palette.error.dark,
+              background: theme.palette.success.light,
+              color: theme.palette.success.dark,
               '&:hover': {
-                background: theme.palette.error.dark,
-                color: theme.palette.error.light
+                background: theme.palette.success.dark,
+                color: theme.palette.success.light
               }
             }}
             onClick={handleLeftDrawerToggle}

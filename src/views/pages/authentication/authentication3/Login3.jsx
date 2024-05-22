@@ -39,8 +39,8 @@ const Login = () => {
                     <Grid container direction={matchDownSM ? 'column-reverse' : 'row'} alignItems="center" justifyContent="center">
                       <Grid item>
                         <Stack alignItems="center" justifyContent="center" spacing={1}>
-                          <Typography color={theme.palette.error.main} gutterBottom variant={matchDownSM ? 'h3' : 'h2'} align="center">
-                            PENGADUAN KEKERASAN SEKSUAL
+                          <Typography color={theme.palette.success.main} gutterBottom variant={matchDownSM ? 'h3' : 'h2'} align="center">
+                          Prediksi Penjualan Produk Terlaris
                           </Typography>
                         </Stack>
                       </Grid>
