@@ -8,12 +8,12 @@ const icons = { IconDashboard };
 
 const article = {
   id: 'article',
-  title: 'Article',
+  title: 'Hasil',
   type: 'group',
   children: [
     {
       id: 'article',
-      title: 'Article',
+      title: 'Hasil',
       type: 'item',
       icon: icons.IconDashboard,
       url: '/article/article-check'

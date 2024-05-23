@@ -68,7 +68,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
           }
         }}
         ModalProps={{ keepMounted: true }}
-        color={theme.palette.su.light}
+        color={theme.palette.success.light}
       >
         {drawer}
       </Drawer>

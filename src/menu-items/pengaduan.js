@@ -7,13 +7,13 @@ const icons = { IconUserCheck };
 // ==============================|| EXTRA PAGES MENU ITEMS ||============================== //
 
 const pengaduan = {
-  id: 'pengaduan',
-  title: 'Pengaduan',
+  id: 'pengaduan ',
+  title: 'Variabel',
   type: 'group',
   children: [
     {
       id: 'pengaduan',
-      title: 'Pengaduan',
+      title: 'Variabel',
       type: 'item',
       icon: icons.IconUserCheck,
       url: '/pengaduan/pengaduan-check'
