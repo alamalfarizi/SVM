@@ -34,7 +34,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
         <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
           <Stack alignItems="center" justifyContent="center" sx={{ height: '100%' }}>
             <Typography color={theme.palette.success.main} gutterBottom variant="h4">
-              K
+              SVM Methods
             </Typography>
           </Stack>
         </Box>

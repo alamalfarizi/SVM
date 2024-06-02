@@ -16,7 +16,6 @@ import { IconSearch, IconX } from '@tabler/icons-react';
 import { shouldForwardProp } from '@mui/system';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { submitTicket } from '../../store/actions/PengaduanAction';
 import { toastNotif, ToastStatus } from '../../utils/Toast';
 import { useNavigate } from 'react-router';
 
@@ -128,35 +127,35 @@ const SearchOne = () => {
   const [dataSearch, setDataSearch] = useState();
 
   const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      setDataSearch(searchInput);
-      dispatch(submitTicket({ ticket: searchInput }))
-        .unwrap()
-        .then((val) => {
-          console.log(val);
-          if (val.error === false) {
-            toastNotif(ToastStatus.SUCCESS, val.message);
-            navigate(`/result/${val.data.report.id_report}`);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          toastNotif(ToastStatus.ERROR, 'engaduan tidak ditemukan');
-        });
-    }
+    // if (event.key === 'Enter') {
+    //   setDataSearch(searchInput);
+    //   dispatch(submitTicket({ ticket: searchInput }))
+    //     .unwrap()
+    //     .then((val) => {
+    //       console.log(val);
+    //       if (val.error === false) {
+    //         toastNotif(ToastStatus.SUCCESS, val.message);
+    //         navigate(`/result/${val.data.report.id_report}`);
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //       toastNotif(ToastStatus.ERROR, 'engaduan tidak ditemukan');
+    //     });
+    // }
 
-    dispatch(submitTicket({ ticket: searchInput }))
-      .unwrap()
-      .then((val) => {
-        console.log(val);
-        if (val.error === false) {
-          toastNotif(ToastStatus.SUCCESS, val.message);
-          navigate(`/result/${val.data.report.id_report}`);
-        }
-      })
-      .catch((error) => {
-        toastNotif(ToastStatus.ERROR, 'Pengaduan tidak ditemukan');
-      });
+    // dispatch(submitTicket({ ticket: searchInput }))
+    //   .unwrap()
+    //   .then((val) => {
+    //     console.log(val);
+    //     if (val.error === false) {
+    //       toastNotif(ToastStatus.SUCCESS, val.message);
+    //       navigate(`/result/${val.data.report.id_report}`);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     toastNotif(ToastStatus.ERROR, 'Pengaduan tidak ditemukan');
+    //   });
   };
 
   const handleSearchInput = (event) => {

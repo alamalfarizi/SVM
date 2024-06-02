@@ -6,10 +6,6 @@ import Loadable from '../ui-component/Loadable';
 
 // login routing
 const HomePage = Loadable(lazy(() => import('../views/landing/Home')));
-const ComplaintPage = Loadable(lazy(() => import('../views/landing/Complaint')));
-const ArtikelPage = Loadable(lazy(() => import('../views/landing/Article')));
-const ResultPage = Loadable(lazy(() => import('../views/landing/Result/ResultById')));
-
 // ==============================|| AUTH ROUTING ||============================== //
 
 const LandingRoutes = {
@@ -20,18 +16,7 @@ const LandingRoutes = {
       path: '/',
       element: <HomePage />
     },
-    {
-      path: '/pengaduan',
-      element: <ComplaintPage />
-    },
-    {
-      path: '/artikel',
-      element: <ArtikelPage />
-    },
-    {
-      path: '/result/:id',
-      element: <ResultPage />
-    },
+ 
     
   ]
 };

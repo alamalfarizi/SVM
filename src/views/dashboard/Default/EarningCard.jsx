@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
-import { Avatar, Box, ButtonBase, Grid, Menu, MenuItem, Typography } from '@mui/material';
+import { Avatar, Box, ButtonBase, Grid, Typography } from '@mui/material';
 
 // project imports
 import MainCard from '../../../ui-component/cards/MainCard';
@@ -11,14 +11,7 @@ import SkeletonEarningCard from '../../../ui-component/cards/Skeleton/EarningCar
 
 // assets
 import EarningIcon from '../../../assets/images/icons/earning.svg';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import GetAppTwoToneIcon from '@mui/icons-material/GetAppOutlined';
-import FileCopyTwoToneIcon from '@mui/icons-material/FileCopyOutlined';
-import PictureAsPdfTwoToneIcon from '@mui/icons-material/PictureAsPdfOutlined';
-import ArchiveTwoToneIcon from '@mui/icons-material/ArchiveOutlined';
-import { useDispatch, useSelector } from 'react-redux';
-import { getPengaduanAll } from '../../../store/actions/PengaduanAction';
 import { useNavigate } from 'react-router';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
@@ -61,15 +54,9 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 const EarningCard = ({ isLoading }) => {
   const theme = useTheme();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const pengaduanState = useSelector((state) => state.pengaduan.all);
-  const [total, setTotal] = useState(pengaduanState?.length);
 
 
-  useEffect(() => {
-    dispatch(getPengaduanAll());
-  }, [dispatch]);
 
   return (
     <>
@@ -82,7 +69,7 @@ const EarningCard = ({ isLoading }) => {
               <Grid item>
                 <Grid container justifyContent="space-between">
                   <Grid item>
-                    <ButtonBase onClick={() => navigate('pengaduan/pengaduan-check')}>
+                    <ButtonBase onClick={() => navigate('/')}>
                       <Avatar
                         variant="rounded"
                         sx={{
@@ -102,7 +89,7 @@ const EarningCard = ({ isLoading }) => {
               <Grid item>
                 <Grid container alignItems="center">
                   <Grid item>
-                    <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>{total}</Typography>
+                    <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>1</Typography>
                   </Grid>
                   <Grid item>
                     <Avatar

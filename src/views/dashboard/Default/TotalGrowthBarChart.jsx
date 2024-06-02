@@ -17,15 +17,11 @@ import { gridSpacing } from '../../../store/constant';
 
 // chart data
 import chartData from './chart-data/total-growth-bar-chart';
-import { getPengaduanAll } from '../../../store/actions/PengaduanAction';
 
 // ==============================|| DASHBOARD DEFAULT - TOTAL GROWTH BAR CHART ||============================== //
 
 const TotalGrowthBarChart = ({ isLoading }) => {
   const theme = useTheme();
-  const dispatch = useDispatch();
-  const customization = useSelector((state) => state.customization);
-  const pengaduanState = useSelector((state) => state.pengaduan.all);
 
   const { navType } = customization;
   const { primary } = theme.palette.text;

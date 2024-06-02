@@ -101,7 +101,7 @@ const NavCollapse = ({ menu, level }) => {
           '&:hover, &:focus': {
             backgroundColor: theme.palette.error.light,
             color: theme.palette.error.dark,
-            '& .MuiListItemIcon-root': { color: theme.palette.error.dark }
+            '& .MuiListItemIcon-root': { color: theme.palette.error.dark } // masih error bukan success
           },
           '&.Mui-selected': {
             backgroundColor: theme.palette.error.light,

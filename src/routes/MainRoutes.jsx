@@ -8,24 +8,20 @@ import ProtectedRoute from '../utils/ProtectedRoute';
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('../views/dashboard/Default')));
 
-// data routing
-const DataPage = Loadable(lazy(() => import('../views/data/DataCheck')));
-const DataAddPage = Loadable(lazy(() => import('../views/data/DataAdd')));
-const DataDetailPage = Loadable(lazy(() => import('../views/data/DataDetail')));
-const DataAddAnswer = Loadable(lazy(() => import('../views/data/DataAddAnswer')));
+// product routing
+const ProductCheck = Loadable(lazy(() => import('../views/product/ProductCheck')));
+const ProductAdd = Loadable(lazy(() => import('../views/product/ProductAdd')));
+const ProductDetail = Loadable(lazy(() => import('../views/product/ProductDetail')));
 
-// Pengaduan routing
-const PengaduanPage = Loadable(lazy(() => import('../views/pengaduan/PengaduanCheck')));
-const PengaduanDetailPage = Loadable(lazy(() => import('../views/pengaduan/PengaduanCheckDetail')));
-const PengaduanAddPage = Loadable(lazy(() => import('../views/pengaduan/PengaduanAdd')));
+// kategori routing
+const KategoriCheck = Loadable(lazy(() => import('../views/kategori/KategoriCheck')));
+const KategoriAdd = Loadable(lazy(() => import('../views/kategori/KategoriAdd')));
+const KategoriDetail = Loadable(lazy(() => import('../views/kategori/KategoriDetail')));
 
-// Article routing
-const ArticlePage = Loadable(lazy(() => import('../views/article/ArticleCheck')));
-const ArticleDetailPage = Loadable(lazy(() => import('../views/article/ArticleDetail')));
-const ArticleAddPage = Loadable(lazy(() => import('../views/article/ArticleAdd')));
-
-// Pengaturan
-import ApplicationRoutes from './pengaturan/application-routers';
+// transaksi routing
+const TransaksiCheck = Loadable(lazy(() => import('../views/transaksi/TransaksiCheck')));
+const TransaksiAdd = Loadable(lazy(() => import('../views/transaksi/TransaksiAdd')));
+const TransaksiDetail = Loadable(lazy(() => import('../views/transaksi/TransaksiDetail')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -47,71 +43,61 @@ const MainRoutes = {
       ]
     },
 
-    // Data Routes
+    // Product
     {
-      path: 'data',
+      path: 'product',
       children: [
         {
-          path: 'data-check',
-          element: <DataPage />
+          path: 'product-check',
+          element: <ProductCheck />
         },
         {
-          path: 'data-add',
-          element: <DataAddPage />
+          path: 'product-add',
+          element: <ProductAdd />
         },
         {
-          path: 'data-detail/:id',
-          element: <DataDetailPage />
-        },
-        {
-          path: 'data-answer/:id',
-          element: <DataAddAnswer />
+          path: 'product-detail/:id',
+          element: <ProductDetail />
         }
       ]
     },
 
-    // Pengaduan Routes
+    // Kategori
     {
-      path: 'pengaduan',
+      path: 'kategori',
       children: [
         {
-          path: 'pengaduan-check',
-          element: <PengaduanPage />
+          path: 'kategori-check',
+          element: <KategoriCheck />
         },
         {
-          path: 'pengaduan-detail/:id',
-          element: <PengaduanDetailPage />
+          path: 'kategori-add',
+          element: <KategoriAdd />
         },
         {
-          path: 'pengaduan-add',
-          element: <PengaduanAddPage />
+          path: 'kategori-detail/:id',
+          element: <KategoriDetail />
         }
       ]
     },
 
-    // Article
+    // Transaksi
     {
-      path: 'article',
+      path: 'transaksi',
       children: [
         {
-          path: 'article-check',
-          element: <ArticlePage />
+          path: 'transaksi-check',
+          element: <TransaksiCheck />
         },
         {
-          path: 'article-detail/:id',
-          element: <ArticleDetailPage />
+          path: 'transaksi-add',
+          element: <TransaksiAdd />
         },
         {
-          path: 'article-add',
-          element: <ArticleAddPage />
+          path: 'transaksi-detail/:id',
+          element: <TransaksiDetail />
         }
       ]
-    },
-
-    // Pengaturan
-    {
-      path: 'pengaturan',
-      children: [...ApplicationRoutes]
     }
   ]
 };

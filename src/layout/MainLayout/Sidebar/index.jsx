@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Box, Chip, Drawer, Stack, Typography, useMediaQuery } from '@mui/material';
+import { Box, Drawer, Typography, useMediaQuery } from '@mui/material';
 
 // third-party
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -18,7 +18,6 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
   const theme = useTheme();
   const matchUpMd = useMediaQuery(theme.breakpoints.up('md'));
   
-
   const drawer = (
     <>
       <Box sx={{ display: { xs: 'block', md: 'none' } }}>
@@ -68,7 +67,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
           }
         }}
         ModalProps={{ keepMounted: true }}
-        color={theme.palette.su.light}
+        color={theme.palette.success.light}
       >
         {drawer}
       </Drawer>

@@ -1,13 +1,14 @@
 import dashboard from './dashboard';
-import pengaturan from './pengaturan';
-import pengaduan from './pengaduan';
-import data from './data';
-import article from './article';
+import svm from './svm';
+import dataset from './dataset';
+import kategori from './kategori';
+import transaksi from './transaksi';
+
 
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-  items: [dashboard, pengaduan, data, article, pengaturan]
+  items: [dashboard, kategori, dataset, transaksi, svm]
 };
 
 export default menuItems;

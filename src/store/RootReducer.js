@@ -2,23 +2,19 @@ import { combineReducers } from 'redux';
 
 // reducer import
 import customizationReducer from './customizationReducer';
-
 import userSlice from './features/UserSlice';
-import applicationSlice from './features/ApplicationSlice';
-import questionSlice from './features/QuestionSlice';
-import pengaduanSlice from './features/PengaduanSlice';
-import articleSlice from './features/ArticleSlice';
-
+import productTypeSlice from './features/ProductTypeSlice';
+import productSlice from './features/ProductSlice';
+import transactionSlice from './features/TransactionSlice';
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
 const RootReducer = combineReducers({
   customization: customizationReducer,
   user: userSlice.reducer,
-  aplikasi: applicationSlice.reducer,
-  article: articleSlice.reducer,
-  question: questionSlice.reducer,
-  pengaduan: pengaduanSlice.reducer
+  productType: productTypeSlice.reducer,
+  product: productSlice.reducer,
+  transaction: transactionSlice.reducer
 });
 
 export default RootReducer;

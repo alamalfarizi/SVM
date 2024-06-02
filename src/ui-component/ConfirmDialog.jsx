@@ -24,8 +24,8 @@ const ConfirmDialog = ({ isOpen, value, onCancel, onConfirm, confirmTitle, value
             Batal
           </Typography>
         </Button>
-        <Button onClick={() => onConfirm(value)} color="error">
-          <Typography variant="subtitle1" color="error">
+        <Button onClick={() => onConfirm(value)} color="success">
+          <Typography variant="subtitle1" color="success">
             {confirmTitle ? confirmTitle : 'Aktifkan / Nonaktifkan'}
           </Typography>
         </Button>

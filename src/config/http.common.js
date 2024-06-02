@@ -25,7 +25,7 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
   (res) => {
-    console.log(`here Success ${res.data.message}`, res);
+    // console.log(`here Success ${res.data.message}`, res);
     return res;
   },
   async (err) => {

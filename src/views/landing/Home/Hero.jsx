@@ -22,12 +22,17 @@ const HeroSection = () => {
           backgroundPosition: 'center'
         }}
       >
-        <Box sx={{ width: isMobile ? '90%' : '60%', paddingTop: isMobile ? 9 : 0 }}>
+        <Box>
           <Typography color="inherit" variant={isMobile ? 'h4' : 'h1'}>
             Selamat Datang di Sistem Prediksi Penjualan Produk Terlaris Pada COFFEE SHOP
           </Typography>
           <Box sx={{ marginTop: isMobile ? 2 : 4 }}>
             <SearchOne />
+          </Box>
+          <Box sx={{ mt: 4 }}>
+            <Typography variant="h1" color={'inherit'}>
+              HAI INI ADALAH CONTAINER
+            </Typography>
           </Box>
         </Box>
       </Hero>

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
 import { Avatar, Box, Button, Grid, Typography } from '@mui/material';
+import { useNavigate } from 'react-router';
 
 
 // project imports
@@ -12,9 +13,8 @@ import SkeletonTotalOrderCard from '../../../ui-component/cards/Skeleton/Earning
 
 // assets
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
-import { useDispatch, useSelector } from 'react-redux';
-import { getQuestionAll } from '../../../store/actions/QuestionAction';
-import { useNavigate } from 'react-router';
+
+
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.success.light,
@@ -62,14 +62,8 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 const TotalOrderLineChartCard = ({ isLoading }) => {
   const theme = useTheme();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const questionState = useSelector((state) => state.question.all);
-  const [values, setValues] = useState(questionState?.length);
 
-  useEffect(() => {
-    dispatch(getQuestionAll());
-  }, [dispatch]);
 
   return (
     <>
@@ -80,7 +74,7 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
           <Box sx={{ p: 2.25 }}>
             <Grid container direction="column">
               <Grid item sx={{ ml: -1.6 }}>
-                <Button onClick={() => navigate(`/data/data-check`)}>
+                <Button onClick={() => navigate(`/`)}>
                   <Avatar
                     variant="rounded"
                     sx={{
@@ -99,7 +93,7 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                   <Grid item xs={12}>
                     <Grid container alignItems="center">
                       <Grid item>
-                        <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 2, mt: 0.2 }}>{values}</Typography>
+                        <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 2, mt: 0.2 }}>1</Typography>
                       </Grid>
                       <Grid item xs={12}>
                         <Typography

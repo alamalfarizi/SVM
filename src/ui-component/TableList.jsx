@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { IconButton, Menu, MenuItem, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { MenuItem, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { Link } from 'react-router-dom';
 import PaginationSection from './PaginationSection';
+import { IconInfoCircle, IconTrash } from '@tabler/icons-react';
 
 function TableList({
   data,
@@ -38,7 +38,7 @@ function TableList({
                 {header}
               </TableCell>
             ))}
-            {tableActions && <TableCell sx={{ fontWeight: '600' }}>Action</TableCell>}
+            {tableActions && <TableCell sx={{ fontWeight: '600', textAlign: 'center' }}>Action</TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -48,7 +48,7 @@ function TableList({
               {children
                 ? children(rowData)
                 : tableBodies.map((body, bodyIndex) => (
-                    <TableCell key={bodyIndex}>
+                    <TableCell sx={{ textAlign: 'center' }} key={bodyIndex}>
                       {imageFields && imageFields.includes(body) ? (
                         <img src={rowData[body]} alt={body} style={{ width: '100px', height: 'auto' }} />
                       ) : (
@@ -57,52 +57,33 @@ function TableList({
                     </TableCell>
                   ))}
               {tableActions && (
-                <TableCell>
-                  <IconButton
-                    aria-label="more"
-                    id={`${index}-long-button`}
-                    aria-controls={`${index}-long-menu`}
-                    aria-expanded={anchorEl ? 'true' : undefined}
-                    aria-haspopup="true"
-                    onClick={(e) => handleClickDropdown(e)}
-                  >
-                    <MoreVertIcon />
-                  </IconButton>
-                  <Menu
-                    id={`${index}-long-menu`}
-                    MenuListProps={{
-                      'aria-labelledby': `${index}-long-button`
-                    }}
-                    anchorEl={anchorEl}
-                    open={Boolean(anchorEl && anchorEl.id === `${index}-long-button`)}
-                    onClose={handleCloseDropdown}
-                    slotProps={{
-                      paper: {
-                        style: {
-                          width: '20ch',
-                          boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1)'
+                <TableCell sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
+                  {tableActions.map((action, index) => (
+                    <MenuItem
+                      key={index}
+                      aria-label={action.title}
+                      sx={{
+                        borderRadius: '99px',
+                        color: action.title === 'Hapus' ? 'error.main' : 'success.main',
+                        backgroundColor: action.title === 'Hapus' ? 'error.light' : 'success.light',
+                        '&:hover': {
+                          backgroundColor: action.title === 'Hapus' ? 'error.main' : 'success.main',
+                          color: 'white'
                         }
+                      }}
+                      component={Link}
+                      to={
+                        action.link
+                          ? typeof action.link === 'function'
+                            ? { pathname: action.link(rowData) }
+                            : action.link + '/' + rowData.id
+                          : null
                       }
-                    }}
-                  >
-                    {tableActions.map((action, index) => (
-                      <MenuItem
-                        key={index}
-                        aria-label={action.title}
-                        component={Link}
-                        to={
-                          action.link
-                            ? typeof action.link === 'function'
-                              ? { pathname: action.link(rowData) }
-                              : action.link + '/' + rowData.id
-                            : null
-                        }
-                        onClick={action.onClickValue ? () => action.onClickValue(rowData) : null}
-                      >
-                        {action.title}
-                      </MenuItem>
-                    ))}
-                  </Menu>
+                      onClick={action.onClickValue ? () => action.onClickValue(rowData) : null}
+                    >
+                      {action.title === 'Hapus' ? <IconTrash /> : <IconInfoCircle />}
+                    </MenuItem>
+                  ))}
                 </TableCell>
               )}
             </TableRow>

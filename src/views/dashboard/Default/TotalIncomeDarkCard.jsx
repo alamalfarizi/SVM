@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
 import { Avatar, Box, Button, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 
 // project imports
 import MainCard from '../../../ui-component/cards/MainCard';
@@ -10,10 +12,6 @@ import TotalIncomeCard from '../../../ui-component/cards/Skeleton/TotalIncomeCar
 
 // assets
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
-import { useDispatch, useSelector } from 'react-redux';
-import { getArticleAll } from '../../../store/actions/ArticleAction';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
 
 // styles
 const CardWrapper = styled(MainCard)(({ theme }) => ({
@@ -56,14 +54,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 const TotalIncomeDarkCard = ({ isLoading }) => {
   const theme = useTheme();
-  const dispacth = useDispatch();
   const navigate = useNavigate();
-  const artikelState = useSelector((state) => state.article.all);
-  const [values, setValues] = useState(artikelState?.length);
-
-  useEffect(() => {
-    dispacth(getArticleAll());
-  }, [dispacth]);
 
   return (
     <>
@@ -74,7 +65,7 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
           <Box sx={{ p: 2 }}>
             <List sx={{ py: 0 }}>
               <ListItem alignItems="center" disableGutters sx={{ py: 0 }}>
-                <Button onClick={() => navigate('/article/article-check')}>
+                <Button onClick={() => navigate('/')}>
                   <Avatar
                     variant="rounded"
                     sx={{
@@ -95,7 +86,7 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
                   }}
                   primary={
                     <Typography variant="h4" sx={{ color: '#fff' }}>
-                      {values}
+                      1
                     </Typography>
                   }
                   secondary={
